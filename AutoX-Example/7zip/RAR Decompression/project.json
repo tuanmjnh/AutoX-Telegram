@@ -1,0 +1,46 @@
+{
+  "abis": [
+    "arm64-v8a",
+    "armeabi-v7a",
+    "x86",
+    "x86_64"
+  ],
+  "assets": [],
+  "buildDir": "build",
+  "build": {
+    "build_id": null,
+    "build_number": 0,
+    "build_time": 0
+  },
+  "useFeatures": [],
+  "icon": null,
+  "ignoredDirs": [],
+  "launchConfig": {
+    "displaySplash": false,
+    "hideLauncher": false,
+    "hideLogs": false,
+    "stableMode": false,
+    "volumeUpcontrol": false,
+    "permissions": [],
+    "serviceDesc": "Required to enable scripts to perform automatic operations (click, long press, slide, etc.). If turned off, only scripts that do not involve automatic operations can be executed.",
+    "splashIcon": null,
+    "splashText": "Powered by 7zip"
+  },
+  "libs": [
+    "libp7zip.so",
+    "libjackpal-androidterm5.so",
+    "libjackpal-termexec2.so"
+  ],
+  "main": "RARDecompression.js",
+  "name": "RAR Decompression",
+  "outputPath": null,
+  "packageName": "com.script.p7zip",
+  "scripts": {},
+  "signingConfig": {
+    "alias": null,
+    "keystore": null
+  },
+  "sourcePath": null,
+  "versionCode": 1,
+  "versionName": "1.0.0"
+}

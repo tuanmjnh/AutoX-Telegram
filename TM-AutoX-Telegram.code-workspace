@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "TM-AutoX-Telegram"
+		},
+		{
+			"path": "AutoX-Example"
+		}
+	],
+  "settings": {
+    "editor.tabSize": 2
+  }
+}
