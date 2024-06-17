@@ -1,10 +1,10 @@
 {
-    "name": "AutoX Telegram",
+    "name": "TM AutoX-Telegram",
     "main": "main.js",
     "ignore": [
         "build"
     ],
-    "packageName": "com.AutoXTelegram",
+    "packageName": "com.TMAutoXTelegram",
     "versionName": "1.0.0",
     "versionCode": 1
 }

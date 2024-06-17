@@ -1,6 +1,6 @@
 "ui";
 
-var utils = require('./utils.js')
+var utils = require("./utils.js");
 var color = "#009688";
 
 ui.layout(
@@ -43,20 +43,20 @@ ui.layout(
 
 //Create options menu (upper right corner)
 ui.emitter.on("create_options_menu", menu => {
-  menu.add("Settings");
-  menu.add("About");
+  menu.add("Settings")
+  menu.add("About")
 });
 //Listen for option menu clicks
 ui.emitter.on("options_item_selected", (e, item) => {
   switch (item.getTitle()) {
     case "Set":
-      toast("Not set yet");
-      break;
+      toast("Not set yet")
+      break
     case "About":
-      alert("About", "Auto.js interface template v1.0.0");
-      break;
+      alert("About", "Auto.js interface template v1.0.0")
+      break
   }
-  e.consumed = true;
+  e.consumed = true
 });
 activity.setSupportActionBar(ui.toolbar);
 
@@ -90,44 +90,56 @@ ui.menu.setDataSource([
 ui.menu.on("item_click", item => {
   switch (item.title) {
     case "Exit":
-      ui.finish();
-      break;
+      ui.finish()
+      break
   }
-})
-var storage = storages.create("apps")
+});
+var storage = storages.create("apps");
 
 // Claim
-var jsFilesClaim = files.listDir(utils.rootApps, function (name) {
-  return name.endsWith(".js") && files.isFile(files.join(utils.rootApps, name))
-})
-jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false } })
+var jsFilesClaim = files.listDir(utils.rootAppsClaim, function (name) {
+  return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsClaim, name))
+});
+jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false } });
 
 // Tap
-var jsFilesTap = files.listDir(utils.rootApps, function (name) {
-  return name.endsWith(".js") && files.isFile(files.join(utils.rootApps, name))
-})
-jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false } })
+var jsFilesTap = files.listDir(utils.rootAppsTap, function (name) {
+  return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsTap, name))
+});
+jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false } });
+
+// log({ claim: jsFilesClaim, tap: jsFilesTap })
+// storage.remove("apps")
+// storage.put("apps", { claim: jsFilesClaim, tap: jsFilesTap })
 
 var apps = storage.get("apps", { claim: jsFilesClaim, tap: jsFilesTap });
 
+ui.appsClaim.setDataSource(apps.claim);
 
-// ui.apps.setDataSource(apps);
+ui.appsClaim.on("item_bind", function (itemView, itemHolder) {
+  //Binding check box event
+  itemView.c.on("check", function (checked) {
+    let item = itemHolder.item
+    item.c = checked
+  })
+});
 
-// ui.apps.on("item_bind", function (itemView, itemHolder) {
-//   //Binding check box event
-//   itemView.c.on("check", function (checked) {
-//     let item = itemHolder.item;
-//     item.c = checked;
-//   });
-// });
+ui.appsTap.setDataSource(apps.tap);
 
-// // ui.apps.on("item_click", function (item, i, itemView, listView) {
-// //   itemView.c.checked = !itemView.c.checked;
-// // });
+ui.appsTap.on("item_bind", function (itemView, itemHolder) {
+  //Binding check box event
+  itemView.c.on("check", function (checked) {
+    let item = itemHolder.item
+    item.c = checked
+  })
+});
+// ui.appsClaim.on("item_click", function (item, i, itemView, listView) {
+//   itemView.c.checked = !itemView.c.checked
+// })
 
-// //Save apps when leaving this interface
-// ui.emitter.on("pause", () => {
-//   storage.put("apps", apps);
-// });
+//Save apps when leaving this interface
+ui.emitter.on("pause", () => {
+  storage.put("apps", apps)
+});
 
 log(apps)

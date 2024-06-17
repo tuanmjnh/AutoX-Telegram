@@ -1,9 +1,11 @@
 let utils = {}
-utils.appName = 'TM AutoX-Telegram'
+utils.appPath = 'TM-AutoX-Telegram'
 utils.sdcard = files.getSdcardPath()
 utils.root = files.join(utils.sdcard, '脚本')
-utils.rootApp = files.join(utils.root, utils.appName)
+utils.rootApp = files.join(utils.root, utils.appPath)
 utils.rootApps = files.join(utils.rootApp, 'apps')
+utils.rootAppsClaim = files.join(utils.rootApps, 'claim')
+utils.rootAppsTap = files.join(utils.rootApps, 'tap')
 utils.picturesPath = files.join(utils.sdcard, "Pictures")
 utils.screenshotsPath = files.join(utils.picturesPath, "Screenshots")
 utils.iconPath = files.join(utils.picturesPath, "icons")
