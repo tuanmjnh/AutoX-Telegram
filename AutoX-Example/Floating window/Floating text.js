@@ -1,6 +1,6 @@
 var window = floaty.window(
     <frame gravity="center">
-        <text id="text" text="点击可调整位置" textSize="16sp"/>
+    <text id="text" text="Click to adjust the position" textSize="16sp"/>
     </frame>
 );
 

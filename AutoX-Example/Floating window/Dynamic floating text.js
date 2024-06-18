@@ -1,34 +1,34 @@
 var window = floaty.window(
-    <frame gravity="center">
-        <text id="text" textSize="16sp" textColor="#f44336"/>
-    </frame>
+  <frame gravity="center">
+    <text id="text" textSize="16sp" textColor="#f44336" />
+  </frame>
 );
 
 window.exitOnClose();
 
-window.text.click(()=>{
-    window.setAdjustEnabled(!window.isAdjustEnabled());
+window.text.click(() => {
+  window.setAdjustEnabled(!window.isAdjustEnabled());
 });
 
-setInterval(()=>{
-    //对控件的操作需要在UI线程中执行
-    ui.run(function(){
-        window.text.setText(dynamicText());
-    });
+setInterval(() => {
+  //Control operations need to be performed in the UI thread
+  ui.run(function () {
+    window.text.setText(dynamicText());
+  });
 }, 1000);
 
-function dynamicText(){
-    var date = new Date();
-    var str = util.format("时间: %d:%d:%d\n", date.getHours(), date.getMinutes(), date.getSeconds());
-    str += util.format("内存使用量: %d%%\n", getMemoryUsage());
-    str += "当前活动: " + currentActivity() + "\n";
-    str += "当前包名: " + currentPackage();
-    return str;
+function dynamicText() {
+  var date = new Date();
+  var str = util.format("Time: %d:%d:%d\n", date.getHours(), date.getMinutes(), date.getSeconds());
+  str += util.format("Memory usage: %d%%\n", getMemoryUsage());
+  str += "Current activity: " + currentActivity() + "\n";
+  str += "Current package name: " + currentPackage();
+  return str;
 }
 
-//获取内存使用率
-function getMemoryUsage(){
-    var usage = (100 * device.getAvailMem() / device.getTotalMem());
-    //保留一位小数
-    return Math.round(usage * 10) / 10;
+//Get memory usage
+function getMemoryUsage() {
+  var usage = (100 * device.getAvailMem() / device.getTotalMem());
+  //Keep one decimal place
+  return Math.round(usage * 10) / 10;
 }

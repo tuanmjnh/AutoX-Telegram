@@ -1,10 +1,66 @@
 {
-    "name": "TM AutoX-Telegram",
-    "main": "main.js",
-    "ignore": [
-        "build"
-    ],
-    "packageName": "com.TMAutoXTelegram",
-    "versionName": "1.0.0",
-    "versionCode": 1
+  "abis": [
+    "arm64-v8a",
+    "armeabi-v7a",
+    "x86",
+    "x86_64"
+  ],
+  "assets": [
+    {
+      "form": "/storage/emulated/0/脚本/TM-AutoX-Telegram",
+      "to": "/project"
+    }
+  ],
+  "buildDir": "build",
+  "build": {
+    "build_id": null,
+    "build_number": 0,
+    "build_time": 0
+  },
+  "useFeatures": [],
+  "icon": "res/logo.png",
+  "ignoredDirs": [
+    "build"
+  ],
+  "launchConfig": {
+    "displaySplash": false,
+    "hideLauncher": false,
+    "hideLogs": false,
+    "stableMode": false,
+    "volumeUpcontrol": false,
+    "permissions": [],
+    "serviceDesc": "Required to automate script operations (click, long press, swipe, etc.), if disabled, only scripts that do not involve automatic operations can be executed.",
+    "splashIcon": null,
+    "splashText": "Powered by Autoxjs.com"
+  },
+  "libs": [
+    "libjackpal-androidterm5.so",
+    "libjackpal-termexec2.so",
+    "libopencv_java4.so",
+    "libc++_shared.so",
+    "libpaddle_light_api_shared.so",
+    "libhiai.so",
+    "libhiai_ir.so",
+    "libhiai_ir_build.so",
+    "libNative.so",
+    "libmlkit_google_ocr_pipeline.so",
+    "libtesseract.so",
+    "libpng.so",
+    "libleptonica.so",
+    "libjpeg.so",
+    "libp7zip.so"
+  ],
+  "main": "main.js",
+  "name": "TM AutoX-Telegram",
+  "outputPath": "/storage/emulated/0/脚本/TM-AutoX-Telegram/build",
+  "packageName": "com.TMAutoXTelegram",
+  "projectDirectory": "/storage/emulated/0/脚本/TM-AutoX-Telegram",
+  "scripts": {},
+  "signingConfig": {
+    "alias": null,
+    "keystore": null
+  },
+  "sourcePath": "/storage/emulated/0/脚本/TM-AutoX-Telegram/main.js",
+  "versionCode": 1,
+  "versionName": "1.0.0"
 }

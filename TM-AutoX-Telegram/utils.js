@@ -15,6 +15,13 @@ utils.iconPath = files.join(utils.picturesPath, "icons")
 //   // exit()
 // }
 
+// Request root access (if needed)
+// if (!shell("su", true).code) {
+//   console.log("Root access granted");
+// } else {
+//   console.log("No root access");
+// }
+
 // if (!files.exists(`${iconPath}/`)) 
 files.create(`${utils.picturesPath}/`)
 files.create(`${utils.screenshotsPath}/`)
@@ -57,12 +64,6 @@ utils.removeExtension = (val) => {
   return val.replace(/\.[^/.]+$/, "")
 }
 
-// // Request root access (if needed)
-// if (!shell("su", true).code) {
-//   console.log("Root access granted");
-// } else {
-//   console.log("No root access");
-// }
 // Function to kill an app
 utils.killPackageNameApp = (packageName) => {
   let result = shell("am force-stop " + packageName, true)
@@ -127,22 +128,22 @@ utils.onFindImageAndClick = ({ image, icon, width, height, loop, isPass, isClick
   // return new Promise((resolve, reject) => {
   if (log) console.log(log)
   var iconFind = images.read(icon)
-  image = image ? image : captureScreen()
+  // image = image ? image : captureScreen()
   var p = null, l = 0
   if (loop)
-    do {
+    while (!p) {
       if (l >= loop) if (isPass) break
-      p = findImage(image, iconFind)
+      p = findImage(image ? image : captureScreen(), iconFind)
       sleep(1000)
       l = l + 1
-    } while (p)
-  else p = findImage(image, iconFind)
+    }
+  else p = findImage(image ? image : captureScreen(), iconFind)
   // recycle
   iconFind.recycle()
-  image.recycle()
+  if (image) image.recycle()
   //click
   if (isClick && p) {
-    var point = { x: p.x + (width ? width : rd.rd05()), y: p.y + (height ? height : rd.rd05()) }
+    var point = { x: p.x + (width ? width : utils.rd.rd05()), y: p.y + (height ? height : utils.rd.rd05()) }
     click(point.x, point.y)
     // resolve(point)
   }
@@ -152,28 +153,31 @@ utils.onFindImageAndClick = ({ image, icon, width, height, loop, isPass, isClick
 }
 
 utils.onFindColorClick = ({ image, color, point, threads, loop, isPass, clickAddX, clickAddY, log }) => {
-  //{ image = null, color, point = { x1, y1, x2, y2 }, threads = 8, loop = 0, isPass = true, clickAddX = 10, clickAddY = 10, log }
-  if (log) console.log(log)
-  if (!image) image = captureScreen()
-  if (!threads) threads = 1
-  var p = null, l = 0
-  sleep(500)
-  if (loop)
-    do {
-      if (l >= loop) if (isPass) break
-      p = findColor(image, color, {
-        region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
-        threads: threads
-      })
-      sleep(1000)
-      l = l + 1
-    } while (p)
-  else p = findColor(image, color, {
-    region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
-    threads: threads
+  return new Promise((resolve, reject) => {
+    if (log) console.log(log)
+    // if (!image) image = captureScreen()
+    if (!threads) threads = 1
+    var p = null, l = 0
+    sleep(500)
+    if (loop)
+      while (!p) {
+        if (l >= loop) if (isPass) break
+        p = findColor(image ? image : captureScreen(), color, {
+          region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
+          threads: threads
+        })
+        l = l + 1
+        sleep(1000)
+      }
+    else p = findColor(image ? image : captureScreen(), color, {
+      region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
+      threads: threads
+    })
+    if (image) image.recycle()
+    sleep(500)
+    if (p && clickAddX && clickAddY) utils.onClickArea({ x1: p.x, y1: p.y, x2: clickAddX, y2: clickAddY })
+    resolve(p)
   })
-  sleep(500)
-  if (p && clickAddX && clickAddY) utils.onClickArea({ x1: p.x, y1: p.y, x2: clickAddX, y2: clickAddY })
 }
 
 utils.onFindColorWH = ({ x, y, w, h, log }) => {

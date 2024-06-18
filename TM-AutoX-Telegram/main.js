@@ -1,34 +1,62 @@
 "ui";
 
+importClass(org.opencv.core.Mat);
+importClass(org.opencv.imgcodecs.Imgcodecs);
+importClass(java.lang.System);
+
+// Import necessary modules
+// var floaty = require("floaty");
+// Ensure you have the necessary permission for drawing overlays
+// if (!floaty.checkPermission()) {
+//   floaty.requestPermission();
+//   exit();
+// }
+
 var utils = require("./utils.js");
 var color = "#009688";
 
 ui.layout(
   <drawer id="drawer">
     <vertical>
+      {/* Toolbar */}
       <appbar>
         <toolbar id="toolbar" title="TM AutoX-Telegram" />
         <tabs id="tabs" />
       </appbar>
-      <viewpager id="viewpager">
+      {/* Main content */}
+      <viewpager id="viewpager" layout_width="match_parent" layout_height="0dp" layout_weight="1">
         <frame>
-          <vertical padding="16">
-            <list id="appsClaim">
-              <checkbox id="c" text="{{this.v}}" checked="{{this.c}}" />
-            </list>
-            {/* <checkbox id="cb2" checked="true" text="Checked checkbox" /> */}
-          </vertical>
+          <ScrollView>
+            <vertical padding="16">
+              <list id="appsClaim">
+                <checkbox id="c" text="{{this.v}}" checked="{{this.c}}" />
+              </list>
+            </vertical>
+          </ScrollView>
         </frame>
         <frame>
-          <vertical padding="16">
-            <list id="appsTap">
-              <checkbox id="c" text="{{this.v}}" checked="{{this.c}}" />
-            </list>
-            {/* <checkbox id="cb2" checked="true" text="Checked checkbox" /> */}
-          </vertical>
+          <ScrollView>
+            <vertical padding="16">
+              <list id="appsTap">
+                <checkbox id="c" text="{{this.v}}" checked="{{this.c}}" />
+              </list>
+            </vertical>
+          </ScrollView>
         </frame>
       </viewpager>
+      {/* Footer */}
+      <linear orientation="horizontal" gravity="center" layout_width="match_parent" layout_height="wrap_content">
+        <button id="btnStart" text="Start" layout_weight="1" />
+        {/* <button id="button2" text="Button 2" layout_weight="1" />
+        <button id="button3" text="Button 3" layout_weight="1" /> */}
+      </linear>
     </vertical>
+    {/* Footer */}
+    {/* <linear orientation="horizontal" gravity="center" layout_width="match_parent" layout_height="wrap_content">
+      <button id="button1" text="Button 1" layout_weight="1" />
+      <button id="button2" text="Button 2" layout_weight="1" />
+      <button id="button3" text="Button 3" layout_weight="1" />
+    </linear> */}
     <vertical layout_gravity="left" bg="#ffffff" w="280">
       <img w="280" h="200" scaleType="fitXY" src="http://images.shejidaren.com/wp-content/uploads/2014/10/023746fki.jpg" />
       <list id="menu">
@@ -94,25 +122,27 @@ ui.menu.on("item_click", item => {
       break
   }
 });
+
 var storage = storages.create("apps");
 
 // Claim
 var jsFilesClaim = files.listDir(utils.rootAppsClaim, function (name) {
   return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsClaim, name))
 });
-jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false } });
+jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false, p: utils.rootAppsClaim } });
 
 // Tap
 var jsFilesTap = files.listDir(utils.rootAppsTap, function (name) {
   return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsTap, name))
 });
-jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false } });
+jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false, p: utils.rootAppsTap } });
 
 // log({ claim: jsFilesClaim, tap: jsFilesTap })
-// storage.remove("apps")
+// storage.remove("apps");
 // storage.put("apps", { claim: jsFilesClaim, tap: jsFilesTap })
 
 var apps = storage.get("apps", { claim: jsFilesClaim, tap: jsFilesTap });
+// log(apps)
 
 ui.appsClaim.setDataSource(apps.claim);
 
@@ -131,7 +161,7 @@ ui.appsTap.on("item_bind", function (itemView, itemHolder) {
   itemView.c.on("check", function (checked) {
     let item = itemHolder.item
     item.c = checked
-  })
+  });
 });
 // ui.appsClaim.on("item_click", function (item, i, itemView, listView) {
 //   itemView.c.checked = !itemView.c.checked
@@ -139,7 +169,10 @@ ui.appsTap.on("item_bind", function (itemView, itemHolder) {
 
 //Save apps when leaving this interface
 ui.emitter.on("pause", () => {
-  storage.put("apps", apps)
+  storage.put("apps", apps);
 });
 
-log(apps)
+ui.btnStart.on("click", () => {
+  storage.put("apps", apps);
+  engines.execScriptFile('./floatyWindow.js');
+});

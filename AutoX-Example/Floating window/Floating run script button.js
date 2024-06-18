@@ -1,63 +1,117 @@
-var path = "/sdcard/脚本/test.js";
-if(!files.exists(path)){
-    toast("脚本文件不存在: " + path);
-    exit();
+var path = "./test.js";
+if (!files.exists(path)) {
+  toast("Script file does not exist: " + path);
+  exit();
 }
+// floaty window
+if (!floaty.checkPermission()) {
+  // If there is no floating window permission, prompt the user and jump the request
+  toast("This script requires floating window permission to display the floating window. Please allow it in the subsequent interface and re-run this script.");
+  floaty.requestPermission();
+  exit();
+} else {
+  toastLog('Already have floating window permission');
+}
+
+var isPlay = false
 var window = floaty.window(
-    <frame>
-        <button id="action" text="开始运行" w="90" h="40" bg="#77ffffff"/>
-    </frame>
+  <frame>
+    <vertical id="layout" layout_gravity="left" bg="#33000000" w="30" padding="0 8">
+      {/* <button id="action" text="Start running" w="90" h="40" bg="#77ffffff" /> */}
+      {/* <button id="action" text="Start running" /> */}
+      <ImageButton id="btnStart" src="@drawable/ic_play_circle_outline_black_48dp" w="30" h="30" scaleType="centerCrop" background="#00000000" />
+      {/* <button id="exit" text="Close" /> */}
+      <ImageButton id="btnClose" src="@drawable/ic_close_black_48dp" w="30" h="30" scaleType="centerCrop" background="#00000000" />
+    </vertical>
+  </frame>
 );
 
-setInterval(()=>{}, 1000);
+window.setPosition(0, device.height / 2)
+// window.setSize(100, 500)
+
+setInterval(() => { }, 1000);
 
 var execution = null;
 
-//记录按键被按下时的触摸坐标
+//Record the touch coordinates when the button is pressed
 var x = 0, y = 0;
-//记录按键被按下时的悬浮窗位置
+//Record the floating window position when the button is pressed
 var windowX, windowY;
-//记录按键被按下的时间以便判断长按等动作
+//Record the time the button is pressed to determine long press and other actions
 var downTime;
 
-window.action.setOnTouchListener(function(view, event){
-    switch(event.getAction()){
-        case event.ACTION_DOWN:
-            x = event.getRawX();
-            y = event.getRawY();
-            windowX = window.getX();
-            windowY = window.getY();
-            downTime = new Date().getTime();
-            return true;
-        case event.ACTION_MOVE:
-            //移动手指时调整悬浮窗位置
-            window.setPosition(windowX + (event.getRawX() - x),
-                windowY + (event.getRawY() - y));
-            //如果按下的时间超过1.5秒判断为长按，退出脚本
-            if(new Date().getTime() - downTime > 1500){
-                exit();
-            }
-            return true;
-        case event.ACTION_UP:
-            //手指弹起时如果偏移很小则判断为点击
-            if(Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5){
-                onClick();
-            }
-            return true;
-    }
-    return true;
+var moveInsideDevice = (event, cbActionUp) => {
+  switch (event.getAction()) {
+    case event.ACTION_DOWN:
+      x = event.getRawX();
+      y = event.getRawY();
+      windowX = window.getX();
+      windowY = window.getY();
+      downTime = event.getEventTime();
+      return true;
+    case event.ACTION_MOVE:
+      // Calculate the difference in coordinates
+      var dx = event.getRawX() - x;
+      var dy = event.getRawY() - y;
+      // Calculate new position
+      var newX = windowX + dx;
+      var newY = windowY + dy;
+
+      // Ensure the new position is within the screen bounds
+      newX = Math.max(0, Math.min(newX, device.width - window.layout.getWidth()));
+      newY = Math.max(0, Math.min(newY, device.height - window.getHeight()));
+
+      // Update the window position
+      window.setPosition(newX, newY);
+      return true;
+    case event.ACTION_UP:
+      if (cbActionUp) cbActionUp()
+      return true;
+  }
+}
+window.layout.setOnTouchListener(function (view, event) {
+  moveInsideDevice(event);
+  return true;
 });
 
-function onClick(){
-    if(window.action.getText() == '开始运行'){
-        execution = engines.execScriptFile(path);
-        window.action.setText('停止运行');
-    }else{
-        if(execution){
-            execution.getEngine().forceStop();
-        }
-        window.action.setText('开始运行');
+window.btnStart.setOnTouchListener(function (view, event) {
+  moveInsideDevice(event, () => {
+    // If the offset is small when the finger is lifted, it is judged as a click
+    if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+      onStart();
     }
+  });
+  return true;
+});
+
+window.btnClose.setOnTouchListener(function (view, event) {
+  moveInsideDevice(event, () => {
+    // If the offset is small when the finger is lifted, it is judged as a click
+    if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+      onClose();
+    }
+  });
+  return true;
+});
+
+function onStart() {
+  if (!isPlay) {
+    execution = engines.execScriptFile(path);
+    window.btnStart.setImageResource(android.R.drawable.ic_stop_black_48dp);
+    // window.btnStart.setText('Stop running');
+  } else {
+    if (execution) {
+      execution.getEngine().forceStop();
+    }
+    window.btnStart.setImageResource(android.R.drawable.ic_play_circle_outline_black_48dp);
+    // window.btnStart.setText('Start running');
+  }
 }
 
+function onClose() {
+  window.close()
+  floaty.closeAll()
+}
 
+window.btnStart.setColorFilter(android.graphics.Color.parseColor("#0397d9"));
+window.btnClose.setColorFilter(android.graphics.Color.parseColor("#b80b2d"));

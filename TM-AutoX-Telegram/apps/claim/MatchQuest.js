@@ -1,6 +1,9 @@
-var utils = require(files.path(`./AutoX-Telegram/utils.js`))
+var utils = require(files.path(`./utils.js`))
 var telegram = 'Telegram'
 var id = 'MatchQuest'
+
+if (!requestScreenCapture())  toast("Screenshot request failed")
+
 utils.killApp(telegram)
 sleep(1000)
 launchApp(telegram)
