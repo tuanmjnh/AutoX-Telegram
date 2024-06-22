@@ -2,7 +2,7 @@ var utils = require(files.path(`./utils.js`))
 var telegram = 'Telegram'
 var id = 'MatchQuest'
 
-if (!requestScreenCapture())  toast("Screenshot request failed")
+if (!requestScreenCapture()) toast("Screenshot request failed")
 
 utils.killApp(telegram)
 sleep(1000)
@@ -78,28 +78,42 @@ utils.onFindImageAndClick({
   log: 'Click start'
 })
 sleep(9000)
-swipe(250, 600, 280, 290, 600)
-sleep(2000)
-// utils.onFindImageAndClick({
-//   image: null,
-//   icon: files.join(utils.iconPath, 'toon_nation_collect.png'),
-//   width: utils.rd.rd010(),
-//   height: utils.rd.rd010(),
-//   loop: 3,
-//   isPass: true,
-//   isClick: true,
-//   log: 'Click collect'
-// })
-// sleep(1000)
-// utils.onFindImageAndClick({
-//   image: null,
-//   icon: files.join(utils.iconPath, 'toon_nation_collect2.png'),
-//   width: utils.rd.rd010(),
-//   height: utils.rd.rd010(),
-//   loop: 3,
-//   isPass: true,
-//   isClick: true,
-//   log: 'Click collect'
-// })
-sleep(10000)
+// swipe(250, 600, 280, 290, 600)
+// sleep(2000)
+utils.onFindColorClickAsync({
+  color: '#ff4b4a',
+  point: { x1: 45, y1: 780, x2: 480, y2: 850 },
+  loop: 20,
+  isPass: true,
+  range: { x: 480, y: 850 },
+  log: 'Find color to click claim'
+}).then(x => {
+  if (x) {
+    sleep(2000)
+    utils.onClickArea({ x1: 55, y1: 675, x2: 460, y2: 730, log: 'Click start farming' }).then(y => {
+      sleep(1000)
+      utils.onFindImageAndClickAsync({
+        image: null,
+        icon: files.join(utils.iconPath, 'MatchQuest_friend.png'),
+        width: utils.rd.rd05(),
+        height: utils.rd.rd05(),
+        loop: 3,
+        isPass: true,
+        isClick: true,
+        log: 'Click friend'
+      }).then(z => {
+        utils.onFindColorClickAsync({
+          color: '#ff2f5f',
+          point: { x1: 370, y1: 290, x2: 480, y2: 325 },
+          loop: 20,
+          isPass: true,
+          range: { x: 480, y: 325 },
+          log: 'Find color to click claim friend'
+        }).then(_ => {
+          sleep(3000)
+        })
+      })
+    })
+  }
+})
 utils.killApp(telegram)

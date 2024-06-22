@@ -44,16 +44,15 @@ utils.onFindImageAndClick({
   log: 'Click start'
 })
 sleep(8000)
-utils.onFindColorClick({
+utils.onFindColorClickAsync({
   color: '#dd7602',
   point: { x1: 397, y1: 256, x2: 415, y2: 269 },
   loop: 20,
   isPass: true,
   log: 'Find color to check app opened'
 }).then(x => {
-  log(x)
   if (x) {
-    sleep(3000)
+    sleep(2000)
     swipe(250, 600, 280, 290, 600)
     sleep(2000)
     utils.onFindImageAndClick({

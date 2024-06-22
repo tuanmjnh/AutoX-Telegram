@@ -66,17 +66,38 @@ utils.removeExtension = (val) => {
 
 // Function to kill an app
 utils.killPackageNameApp = (packageName) => {
-  let result = shell("am force-stop " + packageName, true)
+  var result = shell("am force-stop " + packageName, true)
   if (result.code === 0) {
-    console.log("Successfully killed the app: " + packageName)
+    // console.log("Successfully killed the app: " + packageName)
+    return true
   } else {
-    console.log("Failed to kill the app: " + packageName)
+    // console.log("Failed to kill the app: " + packageName)
+    return false
   }
 }
 
+utils.killPackageNameAppAsync = (packageName) => {
+  return new Promise((resolve, reject) => {
+    var rs = utils.killPackageNameApp(packageName)
+    sleep(200)
+    resolve(rs)
+  })
+}
+
 utils.killApp = (appName) => {
-  var packageName = getPackageName("Telegram")
+  var packageName = getPackageName(appName)
   utils.killPackageNameApp(packageName)
+  return true
+}
+
+utils.killAppAsync = (appName) => {
+  return new Promise((resolve, reject) => {
+    var packageName = getPackageName(appName)
+    utils.killPackageNameAppAsync(packageName).then(x => {
+      sleep(200)
+      resolve(x)
+    })
+  })
 }
 
 
@@ -113,6 +134,15 @@ utils.onClickArea = ({ x1, y1, x2, y2, log }) => {
     y: random(y1, y2)
   }
   click(p.x, p.y)
+  return p
+}
+
+utils.onClickAreaAsync = ({ x1, y1, x2, y2, log }) => {
+  return new Promise((resolve, reject) => {
+    var p = utils.onClickArea({ x1, y1, x2, y2, log })
+    sleep(200)
+    resolve(p)
+  })
 }
 
 utils.onClickAreaWH = ({ x, y, w, h, log }) => {
@@ -122,10 +152,18 @@ utils.onClickAreaWH = ({ x, y, w, h, log }) => {
     y: random(y, y + h)
   }
   click(p.x, p.y)
+  return p
+}
+
+utils.onClickAreaWHAsync = ({ x, y, w, h, log }) => {
+  return new Promise((resolve, reject) => {
+    var p = utils.onClickAreaWH({ x, y, w, h, log })
+    sleep(200)
+    resolve(p)
+  })
 }
 
 utils.onFindImageAndClick = ({ image, icon, width, height, loop, isPass, isClick, log }) => {
-  // return new Promise((resolve, reject) => {
   if (log) console.log(log)
   var iconFind = images.read(icon)
   // image = image ? image : captureScreen()
@@ -145,37 +183,49 @@ utils.onFindImageAndClick = ({ image, icon, width, height, loop, isPass, isClick
   if (isClick && p) {
     var point = { x: p.x + (width ? width : utils.rd.rd05()), y: p.y + (height ? height : utils.rd.rd05()) }
     click(point.x, point.y)
-    // resolve(point)
   }
-  // resolve(null)
   return p
-  // })
 }
 
-utils.onFindColorClick = ({ image, color, point, threads, loop, isPass, clickAddX, clickAddY, log }) => {
+
+utils.onFindImageAndClickAsync = ({ image, icon, width, height, loop, isPass, isClick, log }) => {
   return new Promise((resolve, reject) => {
-    if (log) console.log(log)
-    // if (!image) image = captureScreen()
-    if (!threads) threads = 1
-    var p = null, l = 0
-    sleep(500)
-    if (loop)
-      while (!p) {
-        if (l >= loop) if (isPass) break
-        p = findColor(image ? image : captureScreen(), color, {
-          region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
-          threads: threads
-        })
-        l = l + 1
-        sleep(1000)
-      }
-    else p = findColor(image ? image : captureScreen(), color, {
-      region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
-      threads: threads
-    })
-    if (image) image.recycle()
-    sleep(500)
-    if (p && clickAddX && clickAddY) utils.onClickArea({ x1: p.x, y1: p.y, x2: clickAddX, y2: clickAddY })
+    var p = utils.onFindImageAndClick({ image, icon, width, height, loop, isPass, isClick, log })
+    sleep(200)
+    resolve(p)
+  })
+}
+
+utils.onFindColorClick = ({ image, color, point, threads, loop, isPass, range, log }) => {
+  if (log) console.log(log)
+  // if (!image) image = captureScreen()
+  if (!threads) threads = 1
+  var p = null, l = 0
+  sleep(500)
+  if (loop)
+    while (!p) {
+      if (l >= loop) if (isPass) break
+      p = findColor(image ? image : captureScreen(), color, {
+        region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
+        threads: threads
+      })
+      l = l + 1
+      sleep(1000)
+    }
+  else p = findColor(image ? image : captureScreen(), color, {
+    region: [point.x1, point.y1, point.x2 - point.x1, point.y2 - point.y1],
+    threads: threads
+  })
+  if (image) image.recycle()
+  sleep(500)
+  if (p && range) utils.onClickArea({ x1: p.x, y1: p.y, x2: range.x, y2: range.y })
+  return p
+}
+
+utils.onFindColorClickAsync = ({ image, color, point, threads, loop, isPass, range, log }) => {
+  return new Promise((resolve, reject) => {
+    var p = utils.onFindColorClick({ image, color, point, threads, loop, isPass, range, log })
+    sleep(200)
     resolve(p)
   })
 }
@@ -187,7 +237,17 @@ utils.onFindColorWH = ({ x, y, w, h, log }) => {
     y: random(y, y + h)
   }
   click(p.x, p.y)
+  return p
 }
+
+utils.onFindColorWHAsync = ({ x, y, w, h, log }) => {
+  return new Promise((resolve, reject) => {
+    var p = utils.onFindColorWH({ x, y, w, h, log })
+    sleep(200)
+    resolve(p)
+  })
+}
+
 
 utils.onTypeText = (text, log) => {
   if (log) console.log(log)
@@ -196,6 +256,16 @@ utils.onTypeText = (text, log) => {
     Text(text[i])
     if (i < text.length - 1) KeyCode(62) //Key code Space
   }
+  sleep(200)
+  return true
+}
+
+utils.onTypeTextAsync = (text, log) => {
+  return new Promise((resolve, reject) => {
+    utils.onTypeText(text, log)
+    sleep(200)
+    resolve(true)
+  })
 }
 
 utils.isDestroyedEngine = (engine, delay) => {
@@ -206,6 +276,14 @@ utils.isDestroyedEngine = (engine, delay) => {
   } while (!isDestroyed)
   sleep(500)
   return isDestroyed
+}
+
+utils.isDestroyedEngineAsync = (engine, delay) => {
+  return new Promise((resolve, reject) => {
+    var isDestroyed = utils.isDestroyedEngine(engine, delay)
+    sleep(200)
+    resolve(isDestroyed)
+  })
 }
 
 module.exports = utils
