@@ -1,8 +1,8 @@
 "ui";
 
-importClass(org.opencv.core.Mat);
-importClass(org.opencv.imgcodecs.Imgcodecs);
-importClass(java.lang.System);
+// importClass(org.opencv.core.Mat);
+// importClass(org.opencv.imgcodecs.Imgcodecs);
+// importClass(java.lang.System);
 
 // Import necessary modules
 // var floaty = require("floaty");
@@ -68,6 +68,9 @@ ui.layout(
     </vertical>
   </drawer>
 );
+//Color button
+ui.btnStart.setBackgroundColor(colors.parseColor("#0397d9"));
+ui.btnStart.setTextColor(android.graphics.Color.parseColor("#ffffff"));
 
 //Create options menu (upper right corner)
 ui.emitter.on("create_options_menu", menu => {
@@ -142,6 +145,8 @@ jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension
 // storage.put("apps", { claim: jsFilesClaim, tap: jsFilesTap })
 
 var apps = storage.get("apps", { claim: jsFilesClaim, tap: jsFilesTap });
+utils.pushIfNotExist(apps.claim, jsFilesClaim, 'k')
+utils.pushIfNotExist(apps.tap, jsFilesTap, 'k')
 // log(apps)
 
 ui.appsClaim.setDataSource(apps.claim);
@@ -172,7 +177,22 @@ ui.emitter.on("pause", () => {
   storage.put("apps", apps);
 });
 
+var isStart = false;
+var engine = null;
 ui.btnStart.on("click", () => {
-  storage.put("apps", apps);
-  engines.execScriptFile('./floatyWindow.js');
+  if (isStart) {
+    isStart = false;
+    var floatyWindowEngine = engine.getEngine();
+    if (floatyWindowEngine) floatyWindowEngine.forceStop();
+    // ui.btnStart.setEnabled(true);
+    ui.btnStart.setText("Start");
+    ui.btnStart.setBackgroundColor(colors.parseColor("#0397d9"));
+  } else {
+    isStart = true;
+    // ui.btnStart.setEnabled(false);
+    ui.btnStart.setText("Stop");
+    ui.btnStart.setBackgroundColor(colors.parseColor("#d65801"));
+    storage.put("apps", apps);
+    engine = engines.execScriptFile('./floatyWindow.js');
+  }
 });

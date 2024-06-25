@@ -78,25 +78,25 @@ var moveInsideDevice = (event, cbActionUp) => {
 
 var storage = storages.create("apps");
 var storageApps = storage.get("apps");
-var isDestroyed = false
-var isPlay = false
-var indexApp = 0
-var repeat = 0
-var engine = null
-var engineMain = engines.myEngine()
-const all = engines.all()
+var isDestroyed = false;
+var isPlay = false;
+var indexApp = 0;
+var repeat = 0;
+var engine = null;
+var engineMain = engines.myEngine();
+const all = engines.all();
 // log(all)
 
 var onStop = () => {
-  isPlay = false
-  indexApp = 0
-  repeat = 0
-  const all = engines.all()
+  isPlay = false;
+  indexApp = 0;
+  repeat = 0;
+  const all = engines.all();
   all.forEach(item => {
     // log(item)
     if (item.id != engineMain.id) {
       // log(item.id)
-      item.forceStop()
+      item.forceStop();
     }
   });
 }
@@ -156,7 +156,12 @@ window.btnStop.setOnTouchListener(function (view, event) {
 window.btnClose.setOnTouchListener(function (view, event) {
   moveInsideDevice(event, () => {
     // If the offset is small when the finger is lifted, it is judged as a click
-    engines.stopAllAndToast();
+    engines.stopAll();
+    // const all = engines.all();
+    // for (let i = 0; i < all.length; i++) {
+    //   var source = all[i].getSource().toString().split('/');
+    //   if (source[source.length - 1] == 'main') all[i].forceStop();
+    // }
     window.close();
     floaty.closeAll();
   });

@@ -19,6 +19,7 @@ onCaptureScreenshots = function (name, filePath) {
     // images.recycle()
     console.log("Screenshot save path: ", savePath)
     toast("Screenshot save path: ", savePath)
+    screenshot.recycle()
     // uploadScreenshot(savePath)
     return savePath
   } else {

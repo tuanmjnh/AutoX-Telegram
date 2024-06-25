@@ -7,30 +7,26 @@ if (!requestScreenCapture()) toast("Screenshot request failed")
 utils.killApp(telegram)
 sleep(1000)
 launchApp(telegram)
-sleep(4000)
+sleep(5000)
 utils.onFindImageAndClick({
   image: null,
   icon: files.join(utils.iconPath, 'search.png'),
-  width: utils.rd.rd020(),
-  height: utils.rd.rd020(),
-  loop: 3,
+  loop: 30,
   isPass: true,
-  isClick: true,
+  range: { w: utils.rd.rd010(), h: utils.rd.rd10() },
   log: 'Click search'
 })
 sleep(2000)
-utils.onTypeText(id, 'Type App name')
+utils.onTypingText(id, `Typing ${id}`)
 sleep(5000)
 utils.onClickArea({ x1: 138, y1: 236, x2: 400, y2: 268, log: 'Click app after search' })
 sleep(1500)
 var start = utils.onFindImageAndClick({
   image: null,
   icon: files.join(utils.iconPath, 'MatchQuest_Launch.png'),
-  width: utils.rd.rd010(),
-  height: utils.rd.rd010(),
   loop: 3,
   isPass: true,
-  isClick: true,
+  range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
   log: 'MatchQuest_Launch'
 })
 if (!start) {
@@ -38,11 +34,9 @@ if (!start) {
   start = utils.onFindImageAndClick({
     image: null,
     icon: files.join(utils.iconPath, 'MatchQuest_ClaimNow.png'),
-    width: utils.rd.rd010(),
-    height: utils.rd.rd010(),
     loop: 3,
     isPass: true,
-    isClick: true,
+    range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
     log: 'Click MatchQuest_ClaimNow'
   })
 }
@@ -51,11 +45,9 @@ if (!start) {
   start = utils.onFindImageAndClick({
     image: null,
     icon: files.join(utils.iconPath, 'MatchQuest_StartFarming.png'),
-    width: utils.rd.rd010(),
-    height: utils.rd.rd010(),
     loop: 3,
     isPass: true,
-    isClick: true,
+    range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
     log: 'Click MatchQuest_StartFarming'
   })
 }
@@ -70,14 +62,12 @@ if (!start) {
 utils.onFindImageAndClick({
   image: null,
   icon: files.join(utils.iconPath, 'start.png'),
-  width: utils.rd.rd010(),
-  height: utils.rd.rd010(),
-  loop: 3,
+  loop: 10,
   isPass: true,
-  isClick: true,
+  range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
   log: 'Click start'
 })
-sleep(9000)
+sleep(8000)
 // swipe(250, 600, 280, 290, 600)
 // sleep(2000)
 utils.onFindColorClickAsync({
@@ -90,16 +80,14 @@ utils.onFindColorClickAsync({
 }).then(x => {
   if (x) {
     sleep(2000)
-    utils.onClickArea({ x1: 55, y1: 675, x2: 460, y2: 730, log: 'Click start farming' }).then(y => {
-      sleep(1000)
-      utils.onFindImageAndClickAsync({
-        image: null,
-        icon: files.join(utils.iconPath, 'MatchQuest_friend.png'),
-        width: utils.rd.rd05(),
-        height: utils.rd.rd05(),
-        loop: 3,
+    utils.onClickAreaAsync({ x1: 55, y1: 675, x2: 460, y2: 730, log: 'Click start farming' }).then(y => {
+      sleep(2000)
+      utils.onFindColorClickAsync({
+        color: '#ffffff',
+        point: { x1: 420, y1: 886, x2: 488, y2: 943 },
+        loop: 20,
         isPass: true,
-        isClick: true,
+        range: { w: utils.rd.rd040(), h: utils.rd.rd040() },
         log: 'Click friend'
       }).then(z => {
         utils.onFindColorClickAsync({
@@ -110,10 +98,11 @@ utils.onFindColorClickAsync({
           range: { x: 480, y: 325 },
           log: 'Find color to click claim friend'
         }).then(_ => {
-          sleep(3000)
+          sleep(3900)
+        }).finally(() => {
+          utils.killApp(telegram)
         })
       })
     })
   }
 })
-utils.killApp(telegram)
