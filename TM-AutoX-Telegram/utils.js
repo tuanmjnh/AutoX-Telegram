@@ -87,6 +87,37 @@ utils.pushIfNotExist = function (origin, element, key) {
   }
 }
 
+// Function to open the URL using a specific app
+utils.openUrlWithAppPackageName = (packageName, url) => {
+  try {
+    // Use the intent to open the URL
+    var intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url));
+
+    // Set the package of the specific app you want to open the URL with
+    intent.setPackage(packageName); // Replace with the package name of the app
+
+    // Check if the app is installed
+    var pm = context.getPackageManager();
+    var activities = pm.queryIntentActivities(intent, 0);
+    var isIntentSafe = activities.size() > 0;
+
+    if (isIntentSafe) {
+      // Start the activity
+      app.startActivity(intent);
+      // toast("Opening URL with the specified app.");
+    } //else {
+    //   toast("The specified app is not installed.");
+    // }
+  } catch (error) {
+    toast(error);
+  }
+};
+utils.openUrlWithAppName = (appName, url, log) => {
+  if (log) console.log(log);
+  var packageName = getPackageName(appName);
+  utils.openUrlWithAppPackageName(packageName, url);
+}
+
 // Function to kill an app
 utils.killPackageNameApp = (packageName) => {
   var result = shell("am force-stop " + packageName, true);
@@ -185,41 +216,58 @@ utils.onCaptureScreenshots = function (imageName, screenshotsPath) {
 }
 
 utils.onClickArea = ({ x1, y1, x2, y2, log }) => {
-  if (log) console.log(log)
-  var p = { x: random(x1, x2), y: random(y1, y2) }
-  // console.log(p)
-  click(p.x, p.y)
-  return p
+  if (log) console.log(log);
+  var p = { x: random(x1, x2), y: random(y1, y2) };
+  // console.log(p);
+  click(p.x, p.y);
+  return p;
 }
 
 utils.onClickAreaAsync = ({ x1, y1, x2, y2, log }) => {
   return new Promise((resolve, reject) => {
-    var p = utils.onClickArea({ x1, y1, x2, y2, log })
-    sleep(100)
-    resolve(p)
+    var p = utils.onClickArea({ x1, y1, x2, y2, log });
+    sleep(100);
+    resolve(p);
   })
 }
 
 utils.onClickAreaWH = ({ x, y, w, h, log }) => {
-  if (log) console.log(log)
-  var p = { x: random(x, x + w), y: random(y, y + h) }
-  click(p.x, p.y)
-  return p
+  if (log) console.log(log);
+  var p = { x: random(x + 1, x + w - 1), y: random(y + 1, y + h - 1) };
+  click(p.x, p.y);
+  return p;
 }
 
 utils.onClickAreaWHAsync = ({ x, y, w, h, log }) => {
   return new Promise((resolve, reject) => {
-    var p = utils.onClickAreaWH({ x, y, w, h, log })
-    sleep(100)
-    resolve(p)
+    var p = utils.onClickAreaWH({ x, y, w, h, log });
+    sleep(100);
+    resolve(p);
   })
 }
 
+utils.onButtonGetBounds = (button, log) => {
+  if (log) console.log(log);
+  if (!button) return null;
+  // Get the bounds of the button
+  var bounds = button.bounds();
+  // Calculate x, y, width, and height
+  return { x: bounds.left, y: bounds.top, w: bounds.width(), h: bounds.height() };
+}
+
+utils.onButtonClick = (button, log) => {
+  if (log) console.log(log);
+  var bounds = utils.onButtonGetBounds(button);
+  if (!bounds) return null;
+  var p = utils.onClickAreaWH(bounds);
+  return p;
+}
+
 utils.onFindImageAndClick = ({ image, icon, loop, isPass, range, log }) => {
-  if (log) console.log(log)
-  var iconFind = images.read(icon)
+  if (log) console.log(log);
+  var iconFind = images.read(icon);
   // image = image ? image : captureScreen()
-  var p = null, l = 0
+  var p = null, l = 0;
   if (loop)
     while (!p) {
       if (l >= loop) if (isPass) break
@@ -244,18 +292,18 @@ utils.onFindImageAndClick = ({ image, icon, loop, isPass, range, log }) => {
 
 utils.onFindImageAndClickAsync = ({ image, icon, loop, isPass, range, log }) => {
   return new Promise((resolve, reject) => {
-    var p = utils.onFindImageAndClick({ image, icon, loop, isPass, range, log })
-    sleep(100)
-    resolve(p)
+    var p = utils.onFindImageAndClick({ image, icon, loop, isPass, range, log });
+    sleep(100);
+    resolve(p);
   })
 }
 
 utils.onFindColorClick = ({ image, color, point, threads, loop, isPass, range, log }) => {
-  if (log) console.log(log)
+  if (log) console.log(log);
   // if (!image) image = captureScreen()
-  if (!threads) threads = 1
-  var p = null, l = 0
-  sleep(500)
+  if (!threads) threads = 1;
+  var p = null, l = 0;
+  sleep(500);
   if (loop)
     while (!p) {
       if (l >= loop) if (isPass) break
@@ -281,47 +329,44 @@ utils.onFindColorClick = ({ image, color, point, threads, loop, isPass, range, l
 
 utils.onFindColorClickAsync = ({ image, color, point, threads, loop, isPass, range, log }) => {
   return new Promise((resolve, reject) => {
-    var p = utils.onFindColorClick({ image, color, point, threads, loop, isPass, range, log })
-    sleep(100)
-    resolve(p)
+    var p = utils.onFindColorClick({ image, color, point, threads, loop, isPass, range, log });
+    sleep(100);
+    resolve(p);
   })
 }
 
 utils.onFindColorWH = ({ x, y, w, h, log }) => {
-  if (log) console.log(log)
-  var p = {
-    x: random(x, x + w),
-    y: random(y, y + h)
-  }
+  if (log) console.log(log);
+  var p = { x: random(x, x + w), y: random(y, y + h) };
   click(p.x, p.y)
   return p
 }
 
 utils.onFindColorWHAsync = ({ x, y, w, h, log }) => {
   return new Promise((resolve, reject) => {
-    var p = utils.onFindColorWH({ x, y, w, h, log })
-    sleep(100)
-    resolve(p)
+    var p = utils.onFindColorWH({ x, y, w, h, log });
+    sleep(100);
+    resolve(p);
   })
 }
 
 
 utils.onTypingText = (text, log) => {
-  if (log) console.log(log)
-  text = text.split(' ')
+  if (log) console.log(log);
+  text = text.split(' ');
   for (var i = 0; i < text.length; i++) {
-    Text(text[i])
-    if (i < text.length - 1) KeyCode(62) //Key code Space
+    Text(text[i]);
+    if (i < text.length - 1) KeyCode(62); //Key code Space
   }
-  sleep(100)
-  return true
+  sleep(100);
+  return true;
 }
 
 utils.onTypingTextAsync = (text, log) => {
   return new Promise((resolve, reject) => {
-    utils.onTypingText(text, log)
-    sleep(100)
-    resolve(true)
+    utils.onTypingText(text, log);
+    sleep(100);
+    resolve(true);
   })
 }
 

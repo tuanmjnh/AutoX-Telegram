@@ -126,6 +126,9 @@ ui.menu.on("item_click", item => {
   }
 });
 
+// var packageName = getPackageName("Telegram");
+// console.log(packageName);//org.telegram.messenger
+
 var storage = storages.create("apps");
 
 // Claim

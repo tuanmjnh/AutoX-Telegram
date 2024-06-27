@@ -1,5 +1,7 @@
 var utils = require(files.path(`./utils.js`))
-var bot = "https://t.me/CyberFinanceBot?start=cj1UM1ppaG53cGhrSjAmdT1yZWY="
+var bot = "https://t.me/ARIXcoin_bot?start=ref_5629897737"
+//Screenshot request
+if (!requestScreenCapture()) toast("Screenshot request failed");
 //waitFor
 auto.waitFor();
 //open Telegram bot by link
@@ -22,15 +24,13 @@ if (btn) {
   sleep(random(5000, 6000));
 }
 
-//android.widget.Button[@text="Claim Points"]
-btn = className("android.widget.Button").text("Claim Points").findOne(5000);
+//android.view.View[@text="CLAIM"]
+btn = className("android.view.View").text("CLAIM").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Claim Points");
+  utils.onButtonClick(btn, "Click CLAIM");
   sleep(random(5000, 6000));
 }
 
 sleep(random(2000, 3000));
-back();
-sleep(random(1000, 2000));
 back();

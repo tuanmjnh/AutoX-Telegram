@@ -8,8 +8,7 @@ if (!floaty.checkPermission()) {
 } //else {
 //   toastLog('Already have floating window permission');
 // }
-
-if (!requestScreenCapture()) toast("Screenshot request failed")
+// if (!requestScreenCapture()) toast("Screenshot request failed");
 
 var window = floaty.window(
   <frame>

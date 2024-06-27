@@ -1,74 +1,109 @@
 var utils = require(files.path(`./utils.js`))
-var telegram = 'Telegram'
-var id = 'Sphynx'
+var bot = "https://t.me/sphynxmeme_bot/bless?startapp=MqIyynLD"
+//Screenshot request
+if (!requestScreenCapture()) toast("Screenshot request failed");
+//waitFor
+auto.waitFor();
+//open Telegram bot by link
+utils.openUrlWithAppName("Telegram", bot, "Open bot link");
+sleep(random(8000, 10000));
 
-if (!requestScreenCapture()) toast("Screenshot request failed")
+//android.widget.Button[@text="Claim FREE"]
+var btn = className("android.widget.Button").text("Claim FREE").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Claim FREE");
+  sleep(random(3000, 6000));
+}
 
-utils.killApp(telegram)
-sleep(1000)
-launchApp(telegram)
+//android.view.View[@content-desc="Claim"]
+btn = className("android.view.View").desc("Claim").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Claim mining");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.Button[@text="Claim"]
+btn = className("android.widget.Button").text("Claim").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Claim");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.Button[@text="Upgrade"]
+btn = className("android.widget.Button").text("Upgrade").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Upgrade");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.Button[@text="Confirm"]
+btn = className("android.widget.Button").text("Confirm").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Confirm");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.Button[@text="gf6NkiL5a0dfAAAAABJRU5ErkJggg=="]
+btn = className("android.widget.Button").text("gf6NkiL5a0dfAAAAABJRU5ErkJggg==").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Close");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.ImageView[@content-desc="Go back"]
+btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Go Back");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.TextView[@text="Mission"]
+btn = className("android.widget.TextView").text("Mission").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Mission");
+  sleep(random(3000, 6000));
+}
+
+//
 sleep(5000)
-utils.onFindImageAndClick({
-  image: null,
-  icon: files.join(utils.iconPath, 'search.png'),
-  loop: 30,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd10() },
-  log: 'Click search'
-})
+swipe(260, 830, 260, 500, 600)
 sleep(2000)
-utils.onTypingText(id, `Typing ${id}`)
-sleep(5000)
-utils.onClickArea({ x1: 138, y1: 236, x2: 400, y2: 268, log: 'Click app after search' })
+swipe(260, 630, 260, 285, 600)
 sleep(2000)
-utils.onFindColorClickAsync({
-  color: '#448bcc',
-  point: { x1: 35, y1: 900, x2: 143, y2: 946 },
-  loop: 20,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-  log: 'Find color to play app'
-}).then(x => {
-  sleep(2000)
-  utils.onFindImageAndClick({
-    image: null,
-    icon: files.join(utils.iconPath, 'start.png'),
-    loop: 10,
-    isPass: true,
-    range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-    log: 'Click start'
-  })
-  sleep(9000)
-  utils.onFindColorClickAsync({
-    color: '#10c6fe',
-    point: { x1: 193, y1: 700, x2: 350, y2: 808 },
-    loop: 20,
-    isPass: true,
-    range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-    log: 'Click claim spin'
-  }).then(y => {
-    sleep(2000)
-    utils.onFindColorClickAsync({
-      color: '#eab45c',
-      point: { x1: 435, y1: 354, x2: 509, y2: 407 },
-      loop: 20,
-      isPass: true,
-      range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-      log: 'Click minning'
-    }).then(z => {
-      sleep(3000)
-      utils.onFindColorClickAsync({
-        color: '#925c00',
-        point: { x1: 388, y1: 628, x2: 507, y2: 689 },
-        loop: 20,
-        isPass: true,
-        range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-        log: 'Click claim bless'
-      }).then(v => {
-        sleep(8000)
-      }).finally(() => {
-        utils.killApp(telegram)
-      })
-    })
-  })
-})
+swipe(260, 350, 260, 285, 600)
+sleep(3000)
+
+//Task daily
+//android.widget.Button[@text="oHrcblyQNSeooAAAAASUVORK5CYII="])[2]
+var btns = className("android.widget.Button").text("oHrcblyQNSeooAAAAASUVORK5CYII=").find();
+sleep(random(600, 1000));
+if (btns && btns.length > 5) {
+  for (let i = 2; i < 5; i++) {
+    sleep(random(3000, 6000));
+    utils.onButtonClick(btns[i], `Click task daily ${i}`);
+  }
+}
+
+//android.widget.ImageView[@content-desc="Go back"]
+btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Go Back");
+  sleep(random(3000, 6000));
+}
+
+//android.widget.ImageView[@content-desc="Go back"]
+btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (btn) {
+  sleep(random(600, 1000));
+  utils.onButtonClick(btn, "Click Go Back");
+  sleep(random(3000, 6000));
+}

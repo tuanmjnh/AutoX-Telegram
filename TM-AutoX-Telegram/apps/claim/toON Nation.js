@@ -1,75 +1,123 @@
-// try {
-//   System.loadLibrary("opencv_java4"); // Ensure the library is loaded
-//   console.log("OpenCV library loaded successfully.");
-// } catch (err) {
-//   console.error("Failed to load OpenCV library: " + err);
-//   exit();
-// }
-
 var utils = require(files.path(`./utils.js`))
-var telegram = 'Telegram'
-var id = 'toON Nation'
+var bot = "https://t.me/toon_nation_bot/toon_nation?startapp=5629897737"
+//waitFor
+auto.waitFor();
+//open Telegram bot by link
+utils.openUrlWithAppName("Telegram", bot, "Open bot link");
+sleep(random(6900, 9000));
 
-if (!requestScreenCapture()) toast("Screenshot request failed")
+//android.view.View[@content-desc="Bot menu"]
+var btn = className("android.view.View").desc("Bot menu").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Open app");
+  sleep(random(5000, 6000));
+}
 
-utils.killApp(telegram)
-sleep(1000)
-launchApp(telegram)
-sleep(5000)
-utils.onFindImageAndClick({
-  image: null,
-  icon: files.join(utils.iconPath, 'search.png'),
-  loop: 30,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd10() },
-  log: 'Click search'
-})
-sleep(2000)
-utils.onTypingText(id, `Typing ${id}`)
-sleep(5000)
-utils.onClickArea({ x1: 138, y1: 236, x2: 400, y2: 268, log: 'Click app after search' })
-sleep(1500)
-utils.onClickArea({ x1: 33, y1: 910, x2: 70, y2: 940, log: 'Click Start' })
-sleep(1500)
-utils.onFindImageAndClick({
-  image: null,
-  icon: files.join(utils.iconPath, 'start.png'),
-  loop: 3,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-  log: 'Click start'
-})
-sleep(8000)
-utils.onFindColorClickAsync({
-  color: '#dd7602',
-  point: { x1: 370, y1: 222, x2: 436, y2: 311 },
-  loop: 20,
-  isPass: true,
-  log: 'Find color to check app opened'
-}).then(x => {
-  if (x) {
-    sleep(1000)
-    swipe(250, 600, 280, 290, 600)
-    sleep(2000)
-    var collect = utils.onFindImageAndClick({
-      icon: files.join(utils.iconPath, 'toon_nation_collect.png'),
-      loop: 3,
-      isPass: true,
-      range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-      log: 'Click collect'
-    })
-    if (!collect) {
-      sleep(100)
-      utils.onFindImageAndClick({
-        icon: files.join(utils.iconPath, 'toon_nation_collect2.png'),
-        loop: 3,
-        isPass: true,
-        range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-        log: 'Click collect'
-      })
-    }
+//android.widget.TextView[@text="Start"]
+btn = className("android.widget.TextView").text("Start").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Start");
+  sleep(random(5000, 6000));
+}
+
+//android.widget.Button[@text="icon Collect Coins"]
+btn = className("android.widget.Button").text("icon Collect Coins").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Collect Coins");
+  sleep(random(5000, 6000));
+}
+
+//android.widget.Button[@text="Upgrade"]
+btn = className("android.widget.Button").text("Upgrade").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Upgrade");
+  sleep(random(5000, 6000));
+}
+
+function findNthInstance(className, instanceIndex) {
+  var views = className(className).find();
+  if (views.size() > instanceIndex) {
+    return views.get(instanceIndex);
+  } else {
+    return null;
   }
-}).finally(() => {
-  sleep(5000)
-  utils.killApp(telegram)
-})
+}
+
+
+//android.widget.Button[@text="lvl 39 Increase Farming Speed Now 4.8K icon / sec Upgrade for 212M"]
+btn = className("android.widget.Button").textContains("Increase Farming Speed").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Increase Farming Speed");
+  sleep(random(5000, 6000));
+
+  //android.widget.Button[@text="icon 212 560 973 coins"]
+  btn = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn, "Click Upgrade coins");
+    sleep(random(5000, 6000));
+  }
+  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
+  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn.child(0).child(2).child(0).child(0).child(0), "Click Close");
+    sleep(random(5000, 6000));
+  }
+}
+
+//android.widget.Button[@text="lvl 34 Increase Wallet Limit Now 17M icon Upgrade for 88.8M"]
+btn = className("android.widget.Button").textContains("Increase Wallet Limit").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Increase Wallet Limit");
+  sleep(random(5000, 6000));
+
+  //android.widget.Button[@text="icon 212 560 973 coins"]
+  btn = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn, "Click Upgrade coins");
+    sleep(random(5000, 6000));
+  }
+  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
+  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn, "Click Close");
+    sleep(random(5000, 6000));
+  }
+}
+
+//android.widget.Button[@text="lvl 27 Increase Vault Capacity Now 100 000M icon Upgrade for 100 000M"]
+btn = className("android.widget.Button").textContains("Increase Vault Capacity").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Increase Vault Capacity");
+  sleep(random(5000, 6000));
+
+  //android.widget.Button[@text="icon 212 560 973 coins"]
+  btn = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn, "Click Upgrade coins");
+    sleep(random(5000, 6000));
+  }
+  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
+  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
+  if (btn) {
+    sleep(random(1500, 2000));
+    utils.onButtonClick(btn, "Click Close");
+    sleep(random(5000, 6000));
+  }
+}
+
+sleep(random(2000, 3000));
+back();
+sleep(random(1000, 2000));
+back();
