@@ -1,17 +1,26 @@
 var utils = require(files.path(`./utils.js`))
 var bot = "https://t.me/sphynxmeme_bot/bless?startapp=MqIyynLD"
 //Screenshot request
-if (!requestScreenCapture()) toast("Screenshot request failed");
+// if (!requestScreenCapture()) toast("Screenshot request failed");
 //waitFor
 auto.waitFor();
 //open Telegram bot by link
 utils.openUrlWithAppName("Telegram", bot, "Open bot link");
+sleep(random(2000, 2900));
+
+//android.widget.TextView[@text="Start"]
+var btn = className("android.widget.TextView").text("Start").findOne(5000);
+if (btn) {
+  sleep(random(2000, 2900));
+  utils.onButtonClick(btn, "Click Start");
+}
+
 sleep(random(8000, 10000));
 
 //android.widget.Button[@text="Claim FREE"]
-var btn = className("android.widget.Button").text("Claim FREE").findOne(3000);
+btn = className("android.widget.Button").text("Claim FREE").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Claim FREE");
   sleep(random(3000, 6000));
 }
@@ -19,7 +28,7 @@ if (btn) {
 //android.view.View[@content-desc="Claim"]
 btn = className("android.view.View").desc("Claim").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Claim mining");
   sleep(random(3000, 6000));
 }
@@ -27,7 +36,7 @@ if (btn) {
 //android.widget.Button[@text="Claim"]
 btn = className("android.widget.Button").text("Claim").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Claim");
   sleep(random(3000, 6000));
 }
@@ -35,7 +44,7 @@ if (btn) {
 //android.widget.Button[@text="Upgrade"]
 btn = className("android.widget.Button").text("Upgrade").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Upgrade");
   sleep(random(3000, 6000));
 }
@@ -43,7 +52,7 @@ if (btn) {
 //android.widget.Button[@text="Confirm"]
 btn = className("android.widget.Button").text("Confirm").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Confirm");
   sleep(random(3000, 6000));
 }
@@ -51,7 +60,7 @@ if (btn) {
 //android.widget.Button[@text="gf6NkiL5a0dfAAAAABJRU5ErkJggg=="]
 btn = className("android.widget.Button").text("gf6NkiL5a0dfAAAAABJRU5ErkJggg==").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Close");
   sleep(random(3000, 6000));
 }
@@ -59,7 +68,7 @@ if (btn) {
 //android.widget.ImageView[@content-desc="Go back"]
 btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Go Back");
   sleep(random(3000, 6000));
 }
@@ -67,7 +76,7 @@ if (btn) {
 //android.widget.TextView[@text="Mission"]
 btn = className("android.widget.TextView").text("Mission").findOne(3000);
 if (btn) {
-  sleep(random(600, 1000));
+  sleep(random(2000, 2900));
   utils.onButtonClick(btn, "Click Mission");
   sleep(random(3000, 6000));
 }

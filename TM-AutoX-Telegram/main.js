@@ -14,7 +14,7 @@
 
 var utils = require("./utils.js");
 var color = "#009688";
-
+console.log(`width: ${device.width} - height: ${device.height}`)
 ui.layout(
   <drawer id="drawer">
     <vertical>

@@ -1,17 +1,18 @@
 var utils = require(files.path(`./utils.js`))
 var bot = "https://t.me/toon_nation_bot/toon_nation?startapp=5629897737"
+//Screenshot request
+// if (!requestScreenCapture()) toast("Screenshot request failed");
 //waitFor
 auto.waitFor();
 //open Telegram bot by link
 utils.openUrlWithAppName("Telegram", bot, "Open bot link");
-sleep(random(6900, 9000));
+sleep(random(2900, 3900));
 
 //android.view.View[@content-desc="Bot menu"]
 var btn = className("android.view.View").desc("Bot menu").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
   utils.onButtonClick(btn, "Click Open app");
-  sleep(random(5000, 6000));
 }
 
 //android.widget.TextView[@text="Start"]
@@ -19,11 +20,12 @@ btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
   utils.onButtonClick(btn, "Click Start");
-  sleep(random(5000, 6000));
 }
 
-//android.widget.Button[@text="icon Collect Coins"]
-btn = className("android.widget.Button").text("icon Collect Coins").findOne(5000);
+sleep(random(6000, 8000));
+
+//android.widget.Button[@text="Collect Coins"]
+btn = className("android.widget.Button").textContains("Collect Coins").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
   utils.onButtonClick(btn, "Click Collect Coins");
@@ -62,7 +64,12 @@ if (btn) {
     utils.onButtonClick(btn, "Click Upgrade coins");
     sleep(random(5000, 6000));
   }
-  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
+  
+  //new UiSelector().className("android.view.View").instance(9)
+  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View[1]
+
+  //new UiSelector().className("android.widget.Image").instance(4)
+  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View[1]/android.widget.Image
   btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
   if (btn) {
     sleep(random(1500, 2000));

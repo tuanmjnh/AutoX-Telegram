@@ -1,63 +1,38 @@
 var utils = require(files.path(`./utils.js`))
-var telegram = 'Telegram'
-var id = 'snapster trading bot'
+var bot = "https://t.me/snapster_bot?start=5629897737"
+//Screenshot request
+// if (!requestScreenCapture()) toast("Screenshot request failed");
+//waitFor
+auto.waitFor();
+//open Telegram bot by link
+utils.openUrlWithAppName("Telegram", bot, "Open bot link");
+sleep(random(6900, 9000));
 
-if (!requestScreenCapture()) toast("Screenshot request failed")
+//android.widget.Button[@text="🚀 open mini app"])[2]
+var btns = className("android.widget.Button").textContains("open mini app").find();
+if (btns && btns.length) {
+  sleep(random(2000, 2900));
+  utils.onButtonClick(btns[btns.length - 1], "Click Open app");
+}
 
-utils.killApp(telegram)
-sleep(1000)
-launchApp(telegram)
-sleep(5000)
-utils.onFindImageAndClick({
-  image: null,
-  icon: files.join(utils.iconPath, 'search.png'),
-  loop: 30,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd10() },
-  log: 'Click search'
-})
-sleep(2000)
-utils.onTypingText(id, `Typing ${id}`)
-sleep(5000)
-utils.onClickArea({ x1: 138, y1: 236, x2: 400, y2: 268, log: 'Click app after search' })
-sleep(1500)
-utils.onFindColorClickAsync({
-  color: '#448bcc',
-  point: { x1: 35, y1: 900, x2: 143, y2: 946 },
-  loop: 20,
-  isPass: true,
-  range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-  log: 'Find color to click menu'
-}).then(e => {
-  if (e) {
-    sleep(1000)
-    var x = e.x
-    var y = e.y - 65
-    utils.onClickArea({ x1: x, y1: y, x2: x + utils.rd.rd020(), y2: y + utils.rd.rd010(), log: 'Click menu start' })
-    sleep(3000)
-    y = e.y - 160
-    utils.onClickArea({ x1: x, y1: y, x2: x + utils.rd.rd020(), y2: y + utils.rd.rd020(), log: 'Click open app' })
-    sleep(3000)
-    utils.onFindImageAndClick({
-      image: null,
-      icon: files.join(utils.iconPath, 'start.png'),
-      loop: 10,
-      isPass: true,
-      range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-      log: 'Click start'
-    })
-  }
-  sleep(4000)
-  utils.onFindColorClickAsync({
-    color: '#62bfff',
-    point: { x1: 381, y1: 384, x2: 485, y2: 548 },
-    loop: 30,
-    isPass: true,
-    range: { w: utils.rd.rd010(), h: utils.rd.rd010() },
-    log: 'Click claim'
-  }).then(z => {
-    sleep(5000)
-  }).finally(() => {
-    utils.killApp(telegram)
-  })
-})
+//android.widget.TextView[@text="Start"]
+var btn = className("android.widget.TextView").text("Start").findOne(5000);
+if (btn) {
+  sleep(random(2000, 2900));
+  utils.onButtonClick(btn, "Click Start");
+}
+
+sleep(random(5000, 6000));
+
+//android.widget.Button[@text="icon Daily Claim Claim 1000 points every 24h"]
+btn = className("android.widget.Button").textContains("Daily Claim Claim").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onButtonClick(btn, "Click Claim");
+  sleep(random(3900, 5000));
+}
+
+sleep(random(1500, 2000));
+back();
+sleep(random(1500, 2000));
+back();
