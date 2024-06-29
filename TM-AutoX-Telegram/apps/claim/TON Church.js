@@ -12,7 +12,7 @@ sleep(random(2000, 2900));
 btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
 }
 
 sleep(random(5000, 6000));
@@ -21,9 +21,9 @@ sleep(random(5000, 6000));
 btn = className("android.widget.TextView").textContains("INCREASE FAITH").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click CLAIM");
+  utils.onElementClick(btn, "Click CLAIM");
   sleep(random(2500, 3900));
-  utils.onButtonClick(btn, "Click CLAIM");
+  utils.onElementClick(btn, "Click CLAIM");
   sleep(random(5000, 6000));
 }
 

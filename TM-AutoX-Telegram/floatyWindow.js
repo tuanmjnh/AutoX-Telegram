@@ -1,4 +1,5 @@
 var utils = require("./utils.js");
+device.keepScreenOn();
 // floaty window
 if (!floaty.checkPermission()) {
   // If there is no floating window permission, prompt the user and jump the request
@@ -24,6 +25,8 @@ var window = floaty.window(
 );
 
 window.setPosition(0, device.height / 2)
+// window.setPosition(device.width/2, device.height / 2.5)
+// window.setPosition(device.width/2.5, device.height / 1.9)
 // window.setSize(100, 500)
 
 window.btnStart.setColorFilter(android.graphics.Color.parseColor("#0397d9"));
@@ -75,8 +78,9 @@ var moveInsideDevice = (event, cbActionUp) => {
   }
 }
 
-var storage = storages.create("apps");
-var storageApps = storage.get("apps");
+var storage = storages.create(utils.appPath);
+var storageApps = storage.get(utils.appPath);
+// console.log(storageApps)
 var isDestroyed = false;
 var isPlay = false;
 var indexApp = 0;

@@ -13,19 +13,19 @@ var btn = null;
 var cbtn = null;
 if (btns.length > 0 && btns[2]) {
   sleep(random(1000, 2000));
-  cbtn = utils.onButtonClick(btns[2], "Click open app");
+  cbtn = utils.onElementClick(btns[2], "Click open app");
   sleep(random(4000, 6000));
   //android.widget.TextView[@text="Claim"]
   btn = className("android.widget.TextView").text("Claim").findOne(3000);
   if (btn) {
     sleep(random(2000, 2900));
-    cbtn = utils.onButtonClick(btn, "Claim");
+    cbtn = utils.onElementClick(btn, "Claim");
   }
   //android.view.View[@text="Start"]
   btn = className("android.view.View").text("Start").findOne(3000);
   if (btn) {
     sleep(random(2000, 2900));
-    cbtn = utils.onButtonClick(btn, "Start");
+    cbtn = utils.onElementClick(btn, "Start");
   }
   sleep(random(8000, 10000));
   back();

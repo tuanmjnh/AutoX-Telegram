@@ -1,5 +1,5 @@
 var utils = require(files.path(`./utils.js`))
-var bot = "https://t.me/gEmzcoin_bot/tap?startapp=690TaD-UFv1nCFOiCJZPFid"
+var bot = "https://t.me/BBQcoin_bot/BBQcoin?startapp=rp_9000019_5629897737"
 //Screenshot request
 // if (!requestScreenCapture()) toast("Screenshot request failed");
 //waitFor
@@ -17,40 +17,17 @@ if (element) {
 
 sleep(random(5000, 6000));
 
-//android.widget.TextView[@text="claim"]
-element = className("android.widget.TextView").text("claim").findOne(3000);
+//android.widget.Button[@text="Thanks"]
+element = className("android.widget.Button").text("Thanks").findOne(5000);
 if (element) {
-  sleep(random(1500, 2000));
-  utils.onElementClick(element, "Click Claim");
+  sleep(random(2500, 3900));
+  utils.onElementClick(element, "Click Thanks");
   sleep(random(1500, 2000));
 }
 
-//android.widget.Image[@text="button_x.68feca04fc94eaf23537eb7b062829ff"]
-element = className("android.widget.Image").textContains("button_x").findOne(3000);
-if (element) {
-  sleep(random(1500, 2000));
-  utils.onElementClick(element, "Click X");
-  sleep(random(1500, 2000));
-}
-
-//android.view.View[@resource-id="coin-container"]
-// element = id("coin").findOne(5000);
-// console.log(element)
-// if (element) {
-//     sleep(random(1500, 2000));
-//     threads.start(() => {
-//       while (true) {
-//         utils.onElementMultipleGesture(elements[0], 3, { min: 60, max: 90 }, "Click Multiple Icon");
-//       }
-//     })
-//     sleep(random(26000, 30000));
-//     threads.shutDownAll();
-// }
-
-//[175,757][905,1484]
 //device.width/2, device.height / 2.5
 sleep(random(1500, 2000));
-var delay = { min: 10, max: 30 };
+var delay = { min: 5, max: 20 };
 var bounds = { x: device.width / 2, y: device.height / 2.5, w: 200, h: 200 };
 var total = 5
 threads.start(() => {
@@ -62,7 +39,7 @@ threads.start(() => {
     }
   }
 })
-sleep(random(26000, 30000));
+sleep(random(35000, 45000));
 threads.shutDownAll();
 
 sleep(random(2000, 3000));

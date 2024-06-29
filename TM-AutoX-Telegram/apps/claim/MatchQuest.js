@@ -12,7 +12,7 @@ sleep(random(2000, 2900));
 var btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
 }
 
 sleep(random(6000, 8000));
@@ -21,7 +21,7 @@ sleep(random(6000, 8000));
 btn = className("android.widget.TextView").text("Claim").findOne(3000);
 if (btn) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Claim");
+  utils.onElementClick(btn, "Click Claim");
   sleep(random(3000, 6000));
 }
 
@@ -29,7 +29,7 @@ if (btn) {
 btn = className("android.widget.TextView").text("Start Farming").findOne(3000);
 if (btn) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Start Farming");
+  utils.onElementClick(btn, "Click Start Farming");
   sleep(random(3000, 6000));
 }
 
@@ -37,7 +37,7 @@ if (btn) {
 btn = className("android.widget.TextView").text("Friends").findOne(5000);
 if (btn) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Friends");
+  utils.onElementClick(btn, "Click Friends");
   sleep(random(3000, 6000));
 }
 
@@ -45,7 +45,7 @@ if (btn) {
 btn = className("android.widget.TextView").text("Claim").findOne(5000);
 if (btn) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Claim");
+  utils.onElementClick(btn, "Click Claim");
   sleep(random(3000, 6000));
 }
 sleep(random(1500, 3000));

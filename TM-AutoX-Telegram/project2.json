@@ -38,14 +38,26 @@
     "splashText": "Powered by Autoxjs.com"
   },
   "libs": [
-    "libopencv_java4.so",
     "libjackpal-androidterm5.so",
-    "libjackpal-termexec2.so"
+    "libjackpal-termexec2.so",
+    "libopencv_java4.so",
+    "libc++_shared.so",
+    "libpaddle_light_api_shared.so",
+    "libhiai.so",
+    "libhiai_ir.so",
+    "libhiai_ir_build.so",
+    "libNative.so",
+    "libmlkit_google_ocr_pipeline.so",
+    "libtesseract.so",
+    "libpng.so",
+    "libleptonica.so",
+    "libjpeg.so",
+    "libp7zip.so"
   ],
   "main": "main.js",
-  "name": "TM-AutoX-Telegram",
+  "name": "TM AutoX-Telegram",
   "outputPath": "/storage/emulated/0/脚本/TM-AutoX-Telegram/build",
-  "packageName": "com.script.lheueo",
+  "packageName": "com.TMAutoXTelegram",
   "projectDirectory": "/storage/emulated/0/脚本/TM-AutoX-Telegram",
   "scripts": {},
   "signingConfig": {

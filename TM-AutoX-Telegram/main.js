@@ -120,6 +120,9 @@ ui.menu.setDataSource([
 
 ui.menu.on("item_click", item => {
   switch (item.title) {
+    case "Option 1":
+      toast(files.cwd())
+      break
     case "Exit":
       ui.finish()
       break
@@ -129,25 +132,29 @@ ui.menu.on("item_click", item => {
 // var packageName = getPackageName("Telegram");
 // console.log(packageName);//org.telegram.messenger
 
-var storage = storages.create("apps");
-
+var storage = storages.create(utils.appPath);
+var rootApps = files.join(files.cwd(), 'apps');
+var rootAppsClaim = files.join(rootApps, "claim");
+var rootAppsTap = files.join(rootApps, "tap");
+console.log(rootApps)
 // Claim
-var jsFilesClaim = files.listDir(utils.rootAppsClaim, function (name) {
-  return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsClaim, name))
+var jsFilesClaim = files.listDir(rootAppsClaim, function (name) {
+  return name.endsWith(".js") && files.isFile(files.join(rootAppsClaim, name))
 });
-jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false, p: utils.rootAppsClaim } });
+jsFilesClaim = jsFilesClaim.map(x => { return { t: 1, k: x, v: utils.removeExtension(x), c: false, p: rootAppsClaim } });
 
 // Tap
-var jsFilesTap = files.listDir(utils.rootAppsTap, function (name) {
-  return name.endsWith(".js") && files.isFile(files.join(utils.rootAppsTap, name))
+var jsFilesTap = files.listDir(rootAppsTap, function (name) {
+  return name.endsWith(".js") && files.isFile(files.join(rootAppsTap, name))
 });
-jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false, p: utils.rootAppsTap } });
+jsFilesTap = jsFilesTap.map(x => { return { t: 2, k: x, v: utils.removeExtension(x), c: false, p: rootAppsTap } });
 
 // log({ claim: jsFilesClaim, tap: jsFilesTap })
-// storage.remove("apps");
-// storage.put("apps", { claim: jsFilesClaim, tap: jsFilesTap })
+// storage.remove(utils.appPath);
+// storage.put(utils.appPath, { claim: jsFilesClaim, tap: jsFilesTap })
+// var apps = [];
 
-var apps = storage.get("apps", { claim: jsFilesClaim, tap: jsFilesTap });
+var apps = storage.get(utils.appPath, { claim: jsFilesClaim, tap: jsFilesTap });
 utils.pushIfNotExist(apps.claim, jsFilesClaim, 'k')
 utils.pushIfNotExist(apps.tap, jsFilesTap, 'k')
 // log(apps)
@@ -177,7 +184,7 @@ ui.appsTap.on("item_bind", function (itemView, itemHolder) {
 
 //Save apps when leaving this interface
 ui.emitter.on("pause", () => {
-  storage.put("apps", apps);
+  storage.put(utils.appPath, apps);
 });
 
 var isStart = false;
@@ -195,7 +202,7 @@ ui.btnStart.on("click", () => {
     // ui.btnStart.setEnabled(false);
     ui.btnStart.setText("Stop");
     ui.btnStart.setBackgroundColor(colors.parseColor("#d65801"));
-    storage.put("apps", apps);
+    storage.put(utils.appPath, apps);
     engine = engines.execScriptFile('./floatyWindow.js');
   }
 });

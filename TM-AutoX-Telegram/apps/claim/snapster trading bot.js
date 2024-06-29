@@ -12,14 +12,14 @@ sleep(random(6900, 9000));
 var btns = className("android.widget.Button").textContains("open mini app").find();
 if (btns && btns.length) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btns[btns.length - 1], "Click Open app");
+  utils.onElementClick(btns[btns.length - 1], "Click Open app");
 }
 
 //android.widget.TextView[@text="Start"]
 var btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
 }
 
 sleep(random(5000, 6000));
@@ -28,7 +28,7 @@ sleep(random(5000, 6000));
 btn = className("android.widget.Button").textContains("Daily Claim Claim").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Claim");
+  utils.onElementClick(btn, "Click Claim");
   sleep(random(3900, 5000));
 }
 

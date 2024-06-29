@@ -9,110 +9,112 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2000, 2900));
 
 //android.widget.TextView[@text="Start"]
-var btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+var element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(8000, 10000));
 
 //android.widget.Button[@text="Claim FREE"]
-btn = className("android.widget.Button").text("Claim FREE").findOne(3000);
-if (btn) {
+element = className("android.widget.Button").text("Claim FREE").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Claim FREE");
+  utils.onElementClick(element, "Click Claim FREE");
   sleep(random(3000, 6000));
 }
 
 //android.view.View[@content-desc="Claim"]
-btn = className("android.view.View").desc("Claim").findOne(3000);
-if (btn) {
+element = className("android.view.View").desc("Claim").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Claim mining");
+  utils.onElementClick(element, "Click Claim mining");
   sleep(random(3000, 6000));
 }
 
 //android.widget.Button[@text="Claim"]
-btn = className("android.widget.Button").text("Claim").findOne(3000);
-if (btn) {
+element = className("android.widget.Button").text("Claim").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Claim");
+  utils.onElementClick(element, "Click Claim");
   sleep(random(3000, 6000));
 }
 
 //android.widget.Button[@text="Upgrade"]
-btn = className("android.widget.Button").text("Upgrade").findOne(3000);
-if (btn) {
+element = className("android.widget.Button").text("Upgrade").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Upgrade");
+  utils.onElementClick(element, "Click Upgrade");
   sleep(random(3000, 6000));
 }
 
 //android.widget.Button[@text="Confirm"]
-btn = className("android.widget.Button").text("Confirm").findOne(3000);
-if (btn) {
+element = className("android.widget.Button").text("Confirm").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Confirm");
+  utils.onElementClick(element, "Click Confirm");
   sleep(random(3000, 6000));
 }
 
 //android.widget.Button[@text="gf6NkiL5a0dfAAAAABJRU5ErkJggg=="]
-btn = className("android.widget.Button").text("gf6NkiL5a0dfAAAAABJRU5ErkJggg==").findOne(3000);
-if (btn) {
+element = className("android.widget.Button").text("gf6NkiL5a0dfAAAAABJRU5ErkJggg==").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Close");
+  utils.onElementClick(element, "Click Close");
   sleep(random(3000, 6000));
 }
 
 //android.widget.ImageView[@content-desc="Go back"]
-btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
-if (btn) {
+element = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Go Back");
+  utils.onElementClick(element, "Click Go Back");
   sleep(random(3000, 6000));
 }
 
 //android.widget.TextView[@text="Mission"]
-btn = className("android.widget.TextView").text("Mission").findOne(3000);
-if (btn) {
+element = className("android.widget.TextView").text("Mission").findOne(3000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Mission");
+  utils.onElementClick(element, "Click Mission");
   sleep(random(3000, 6000));
 }
 
-//
-sleep(5000)
-swipe(260, 830, 260, 500, 600)
-sleep(2000)
-swipe(260, 630, 260, 285, 600)
-sleep(2000)
-swipe(260, 350, 260, 285, 600)
-sleep(3000)
+for (let i = 0; i < 3; i++) {
+  //swipe(startX, startY, endX, endY, duration);
+  var x = random(220, 280)
+  swipe(x, random(device.height / 1.2, device.height / 1.5), x, random(device.height / 2, device.height / 2.2), random(200, 600))
+  sleep(random(1500, 2500))
+}
 
 //Task daily
-//android.widget.Button[@text="oHrcblyQNSeooAAAAASUVORK5CYII="])[2]
-var btns = className("android.widget.Button").text("oHrcblyQNSeooAAAAASUVORK5CYII=").find();
+//android.widget.Button[@text="Go"])[1]
+var elements = className("android.widget.Button").text("Go").find();
 sleep(random(600, 1000));
-if (btns && btns.length > 5) {
-  for (let i = 2; i < 5; i++) {
-    sleep(random(3000, 6000));
-    utils.onButtonClick(btns[i], `Click task daily ${i}`);
+if (elements && elements.length) {
+  for (let i = 0; i < elements.length; i++) {
+    utils.onElementClick(elements[i], `Click task daily ${i}`);
+    sleep(random(3900, 5000));
+    utils.onElementClick(element, "Click Go Back");
+    sleep(random(3900, 5000));
+    utils.onElementClick(element, "Click Go Back");
+    sleep(random(3900, 5000));
   }
 }
 
 //android.widget.ImageView[@content-desc="Go back"]
-btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
-if (btn) {
+element = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Go Back");
+  utils.onElementClick(element, "Click Go Back");
   sleep(random(3000, 6000));
 }
 
 //android.widget.ImageView[@content-desc="Go back"]
-btn = className("android.widget.ImageView").desc("Go back").findOne(3000);
-if (btn) {
+element = className("android.widget.ImageView").desc("Go back").findOne(3000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onButtonClick(btn, "Click Go Back");
+  utils.onElementClick(element, "Click Go Back");
   sleep(random(3000, 6000));
 }

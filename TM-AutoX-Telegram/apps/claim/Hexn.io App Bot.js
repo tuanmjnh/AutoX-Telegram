@@ -12,16 +12,24 @@ sleep(random(2000, 2900));
 var btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
 }
 
 sleep(random(6900, 9000));
 
-//android.widget.Button[@text="Start farming"]
-btn = className("android.widget.Button").text("Start farming").findOne(5000);
+//android.widget.Button[@text="Claim"]
+btn = className("android.widget.Button").textContains("Claim").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Start farming");
+  utils.onElementClick(btn, "Click Claim");
+  sleep(random(1500, 2000));
+}
+
+//android.widget.Button[@text="Start farming"]
+btn = className("android.widget.Button").textContains("Start farming").findOne(5000);
+if (btn) {
+  sleep(random(1500, 2000));
+  utils.onElementClick(btn, "Click Start farming");
   sleep(random(5000, 6000));
 }
 

@@ -12,7 +12,7 @@ sleep(random(2000, 2900));
 var btn = className("android.view.View").desc("Bot menu").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Open app");
+  utils.onElementClick(btn, "Click Open app");
   sleep(random(5000, 6000));
 }
 
@@ -20,7 +20,7 @@ if (btn) {
 btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
   sleep(random(5000, 6000));
 }
 
@@ -30,7 +30,7 @@ sleep(random(6900, 9000));
 btn = className("android.widget.Button").text("Claim Points").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Claim Points");
+  utils.onElementClick(btn, "Click Claim Points");
   sleep(random(5000, 6000));
 }
 

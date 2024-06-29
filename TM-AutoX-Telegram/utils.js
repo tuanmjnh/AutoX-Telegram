@@ -215,6 +215,13 @@ utils.onCaptureScreenshots = function (imageName, screenshotsPath) {
   }
 }
 
+utils.getRandomBounds = (bounds, isObject) => {
+  var fix = 3
+  var p = { x: random(bounds.x + fix, bounds.x + bounds.w - fix), y: random(bounds.y + fix, bounds.y + bounds.h - fix) };
+  if (isObject) return p;
+  else return [p.x, p.y];
+}
+
 utils.onClickArea = ({ x1, y1, x2, y2, log }) => {
   if (log) console.log(log);
   var p = { x: random(x1, x2), y: random(y1, y2) };
@@ -233,7 +240,8 @@ utils.onClickAreaAsync = ({ x1, y1, x2, y2, log }) => {
 
 utils.onClickAreaWH = ({ x, y, w, h, log }) => {
   if (log) console.log(log);
-  var p = { x: random(x + 1, x + w - 1), y: random(y + 1, y + h - 1) };
+  var fix = 3
+  var p = { x: random(x + fix, x + w - fix), y: random(y + fix, y + h - fix) };
   click(p.x, p.y);
   return p;
 }
@@ -246,20 +254,64 @@ utils.onClickAreaWHAsync = ({ x, y, w, h, log }) => {
   })
 }
 
-utils.onButtonGetBounds = (button, log) => {
+utils.onGetBoundsElement = (element, log) => {
   if (log) console.log(log);
-  if (!button) return null;
-  // Get the bounds of the button
-  var bounds = button.bounds();
+  if (!element) return null;
+  // Get the bounds of the element
+  var bounds = element.bounds();
   // Calculate x, y, width, and height
   return { x: bounds.left, y: bounds.top, w: bounds.width(), h: bounds.height() };
 }
 
-utils.onButtonClick = (button, log) => {
+utils.onElementClick = (element, log) => {
   if (log) console.log(log);
-  var bounds = utils.onButtonGetBounds(button);
+  var bounds = utils.onGetBoundsElement(element);
   if (!bounds) return null;
   var p = utils.onClickAreaWH(bounds);
+  return p;
+}
+
+utils.onElementMultipleClick = (element, totalClick, delay, log) => {
+  if (log) console.log(log);
+  var bounds = utils.onGetBoundsElement(element);
+  if (!bounds) return null;
+  var p = null;
+  if (totalClick == 0) {
+    p = utils.onClickAreaWH(bounds);
+    sleep(random(delay.min, delay.max));
+  } else {
+    var total = random(totalClick.min, totalClick.max);
+    for (let i = 0; i < total; i++) {
+      p = utils.onClickAreaWH(bounds);
+      sleep(random(delay.min, delay.max));
+    }
+  }
+  return p;
+}
+
+utils.onElementMultipleGesture = (element, totalClick, delay, log) => {
+  if (log) console.log(log);
+  var bounds = utils.onGetBoundsElement(element);
+  if (!bounds) return null;
+  var p = null;
+  if (totalClick == 0) {
+    p = utils.getRandomBounds(bounds);
+    gesture(random(delay.min, delay.max), p, p);
+    sleep(random(delay.min * 3, delay.max * 3));
+  } else if (totalClick.min && totalClick.max) {
+    var total = random(totalClick.min, totalClick.max);
+    for (let i = 0; i < total; i++) {
+      p = utils.getRandomBounds(bounds);
+      gesture(random(delay.min, delay.max), p, p);
+      sleep(random(delay.min * 3, delay.max * 3));
+    }
+  } else {
+    for (let i = 0; i < totalClick; i++) {
+      var p = utils.getRandomBounds(bounds);
+      gesture(random(delay.min, delay.max), p, p);
+      sleep(random(delay.min * 3, delay.max * 3));
+    }
+  }
   return p;
 }
 

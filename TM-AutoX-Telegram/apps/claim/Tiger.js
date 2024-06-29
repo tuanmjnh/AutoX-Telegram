@@ -12,27 +12,29 @@ sleep(random(2000, 2900));
 var btn = className("android.widget.Button").text("👉 Play 🎁").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Play");
+  utils.onElementClick(btn, "Click Play");
 }
 
 //android.widget.TextView[@text="Start"]
 btn = className("android.widget.TextView").text("Start").findOne(5000);
 if (btn) {
   sleep(random(2000, 2900));
-  utils.onButtonClick(btn, "Click Start");
+  utils.onElementClick(btn, "Click Start");
 }
 
 sleep(random(6000, 8000));
 
 //android.widget.TextView[@text="Starting"]
-btn = className("android.widget.TextView").text("Starting").findOne(5000);
+btn = className("android.widget.TextView").textContains("Start").findOne(5000);
 if (btn) {
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Starting");
+  utils.onElementClick(btn, "Click Start mining");
   sleep(random(1500, 2000));
-  utils.onButtonClick(btn, "Click Starting");
+  utils.onElementClick(btn, "Click Start mining");
   sleep(random(5000, 6000));
 }
 
+sleep(random(2000, 3000));
+back();
 sleep(random(2000, 3000));
 back();
