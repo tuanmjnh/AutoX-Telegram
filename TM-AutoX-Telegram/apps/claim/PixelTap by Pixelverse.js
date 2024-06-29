@@ -2,7 +2,7 @@ var utils = require(files.path(`./utils.js`));
 // The link you want to open in Telegram
 var bot = "https://t.me/pixelversexyzbot?start=5629897737";
 //Screenshot request
-if (!requestScreenCapture()) toast("Screenshot request failed");
+// if (!requestScreenCapture()) toast("Screenshot request failed");
 auto.waitFor();
 utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2000, 2900));

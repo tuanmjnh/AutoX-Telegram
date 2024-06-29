@@ -2,7 +2,7 @@ var utils = require(files.path(`./utils.js`));
 // The link you want to open in Telegram
 var bot = "https://t.me/seed_coin_bot/app?startapp=5629897737";
 //Screenshot request
-if (!requestScreenCapture()) toast("Screenshot request failed");
+// if (!requestScreenCapture()) toast("Screenshot request failed");
 //waitFor
 auto.waitFor();
 //open Telegram bot by link

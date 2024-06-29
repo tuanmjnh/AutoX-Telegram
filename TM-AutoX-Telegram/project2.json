@@ -24,10 +24,10 @@
   ],
   "launchConfig": {
     "displaySplash": false,
-    "hideLauncher": true,
-    "hideLogs": true,
-    "stableMode": true,
-    "volumeUpcontrol": true,
+    "hideLauncher": false,
+    "hideLogs": false,
+    "stableMode": false,
+    "volumeUpcontrol": false,
     "permissions": [
       "accessibility_services",
       "background_start",
@@ -38,26 +38,14 @@
     "splashText": "Powered by Autoxjs.com"
   },
   "libs": [
-    "libjackpal-androidterm5.so",
-    "libjackpal-termexec2.so",
     "libopencv_java4.so",
-    "libc++_shared.so",
-    "libpaddle_light_api_shared.so",
-    "libhiai.so",
-    "libhiai_ir.so",
-    "libhiai_ir_build.so",
-    "libNative.so",
-    "libmlkit_google_ocr_pipeline.so",
-    "libtesseract.so",
-    "libpng.so",
-    "libleptonica.so",
-    "libjpeg.so",
-    "libp7zip.so"
+    "libjackpal-androidterm5.so",
+    "libjackpal-termexec2.so"
   ],
   "main": "main.js",
-  "name": "TM AutoX-Telegram",
+  "name": "TM-AutoX-Telegram",
   "outputPath": "/storage/emulated/0/脚本/TM-AutoX-Telegram/build",
-  "packageName": "com.TMAutoXTelegram",
+  "packageName": "com.script.lheueo",
   "projectDirectory": "/storage/emulated/0/脚本/TM-AutoX-Telegram",
   "scripts": {},
   "signingConfig": {
