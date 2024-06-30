@@ -9,26 +9,26 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(6900, 9000));
 
 //android.widget.Button[@text="🚀 open mini app"])[2]
-var btns = className("android.widget.Button").textContains("open mini app").find();
-if (btns && btns.length) {
+var elements = className("android.widget.Button").textContains("open mini app").find();
+if (elements && elements.length) {
   sleep(random(2000, 2900));
-  utils.onElementClick(btns[btns.length - 1], "Click Open app");
+  utils.onElementClick(elements[elements.length - 1], "Click Open app");
 }
 
 //android.widget.TextView[@text="Start"]
-var btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+var element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(5000, 6000));
 
 //android.widget.Button[@text="icon Daily Claim Claim 1000 points every 24h"]
-btn = className("android.widget.Button").textContains("Daily Claim Claim").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Daily Claim Claim").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Claim");
+  utils.onElementClick(element, "Click Claim");
   sleep(random(3900, 5000));
 }
 

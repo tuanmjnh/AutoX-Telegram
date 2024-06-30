@@ -9,17 +9,17 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2900, 3900));
 
 //android.view.View[@content-desc="Bot menu"]
-var btn = className("android.view.View").desc("Bot menu").findOne(5000);
-if (btn) {
+var element = className("android.view.View").desc("Bot menu").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Open app");
+  utils.onElementClick(element, "Click Open app");
 }
 
 //android.widget.TextView[@text="Start"]
-btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(6900, 9000));
@@ -32,14 +32,14 @@ for (let i = 0; i < 3; i++) {
 }
 
 //android.widget.Button[@text="Claim logo 90.00000"]
-btn = className("android.widget.Button").textContains("Claim").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Claim").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click CLAIM");
+  utils.onElementClick(element, "Click CLAIM");
   sleep(random(5000, 6000));
-  utils.onElementClick(btn, "Click CLAIM");
+  utils.onElementClick(element, "Click CLAIM");
   sleep(random(5000, 6000));
-  utils.onElementClick(btn, "Click CLAIM");
+  utils.onElementClick(element, "Click CLAIM");
   sleep(random(5000, 6000));
 }
 

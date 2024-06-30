@@ -56,7 +56,7 @@ var total = 5
 threads.start(() => {
   while (true) {
     for (let i = 0; i < total; i++) {
-      p = utils.getRandomBounds(bounds);
+      p = utils.getRandomBoundsWH(bounds, -15);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }

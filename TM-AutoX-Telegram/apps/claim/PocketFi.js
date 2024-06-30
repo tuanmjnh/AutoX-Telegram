@@ -9,27 +9,27 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2000, 2900));
 
 //android.widget.TextView[@text="Start"]
-var btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+var element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(6900, 9000));
 
 //android.widget.TextView[@text="Start"]
-btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
   sleep(random(5000, 6000));
 }
 
 //android.widget.Button[@text="Claim SWITCH"]
-btn = className("android.widget.Button").text("Claim SWITCH").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").text("Claim SWITCH").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Claim SWITCH");
+  utils.onElementClick(element, "Click Claim SWITCH");
   sleep(random(5000, 6000));
 }
 

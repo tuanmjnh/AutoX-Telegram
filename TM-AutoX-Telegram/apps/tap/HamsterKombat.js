@@ -25,12 +25,20 @@ if (element) {
 sleep(random(6900, 8000));
 
 //android.widget.Button[@text="Cảm ơn bạn, Binance"]
-element = className("android.widget.Button").textContains("Cảm ơn bạn").findOne(5000);
+element = className("android.widget.Button").textContains("Cảm ơn bạn").findOne(3000);
 if (element) {
   sleep(random(1500, 2000));
   utils.onElementClick(element, "Click Claim");
-  sleep(random(1500, 2000));
 }
+
+//android.widget.Button[@text="Thank you, Binance"]
+element = className("android.widget.Button").textContains("Thank you").findOne(3000);
+if (element) {
+  sleep(random(1500, 2000));
+  utils.onElementClick(element, "Click Claim");
+}
+
+sleep(random(1500, 2000));
 
 //android.widget.Button[@text="Hamster Kombat"]
 element = className("android.widget.Button").text("Hamster Kombat").findOne(3000);
@@ -38,7 +46,7 @@ if (element) {
   sleep(random(1500, 2000));
   threads.start(() => {
     while (true) {
-      utils.onElementMultipleGesture(element, 5, { min: 10, max: 30 });//, "Click Multiple Icon");
+      utils.onElementMultipleGesture(element, 5, { min: 10, max: 30 }, -20);//, "Click Multiple Icon");
     }
   })
   sleep(random(50000, 60000));

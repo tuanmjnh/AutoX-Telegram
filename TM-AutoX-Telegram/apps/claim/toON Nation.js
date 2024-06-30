@@ -9,119 +9,114 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2900, 3900));
 
 //android.view.View[@content-desc="Bot menu"]
-var btn = className("android.view.View").desc("Bot menu").findOne(5000);
-if (btn) {
+var element = className("android.view.View").desc("Bot menu").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Open app");
+  utils.onElementClick(element, "Click Open app");
 }
 
 //android.widget.TextView[@text="Start"]
-btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(6000, 8000));
 
 //android.widget.Button[@text="Collect Coins"]
-btn = className("android.widget.Button").textContains("Collect Coins").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Collect Coins").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Collect Coins");
-  sleep(random(5000, 6000));
+  utils.onElementClick(element, "Click Collect Coins");
+  sleep(random(2500, 3900));
 }
 
 //android.widget.Button[@text="Upgrade"]
-btn = className("android.widget.Button").text("Upgrade").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").text("Upgrade").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Upgrade");
+  utils.onElementClick(element, "Click Upgrade");
   sleep(random(2000, 3000));
 }
 
-function findNthInstance(className, instanceIndex) {
-  var views = className(className).find();
-  if (views.size() > instanceIndex) {
-    return views.get(instanceIndex);
-  } else {
-    return null;
-  }
-}
-
-
+var eleCloseBounds = null;
 //android.widget.Button[@text="lvl 39 Increase Farming Speed Now 4.8K icon / sec Upgrade for 212M"]
-btn = className("android.widget.Button").textContains("Increase Farming Speed").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Increase Farming Speed").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Increase Farming Speed");
+  utils.onElementClick(element, "Click Increase Farming Speed");
   sleep(random(1500, 2000));
 
   //android.widget.Button[@text="icon 212 560 973 coins"]
-  btn = className("android.widget.Button").textContains("coins").findOne(5000);
-  if (btn) {
+  element = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (element) {
     sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Upgrade coins");
+    utils.onElementClick(element, "Click Upgrade coins");
     sleep(random(2000, 3000));
   }
-  
+
   //new UiSelector().className("android.view.View").instance(9)
   //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View[1]
 
   //new UiSelector().className("android.widget.Image").instance(4)
   //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View/android.view.View[1]/android.widget.Image
-  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
-  if (btn) {
-    sleep(random(1500, 2000));
-    utils.onElementClick(btn.child(0).child(2).child(0).child(0).child(0), "Click Close");
-    sleep(random(1500, 2000));
-  }
+  // element = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
+  // if (element) {
+  //   sleep(random(1500, 2000));
+  //   utils.onElementClick(element.child(0).child(2).child(0).child(0).child(0), "Click Close");
+  //   sleep(random(1500, 2000));
+  // }
+
+  // Get bounds Close
+  var elements = className("android.widget.Image").find();
+  if (elements && elements.length > 24) eleCloseBounds = elements[24].bounds();
+  // Close
+  sleep(random(1500, 2000));
+  utils.onBoundsClick(eleCloseBounds);
+  sleep(random(1500, 2000));
 }
 
 //android.widget.Button[@text="lvl 34 Increase Wallet Limit Now 17M icon Upgrade for 88.8M"]
-btn = className("android.widget.Button").textContains("Increase Wallet Limit").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Increase Wallet Limit").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Increase Wallet Limit");
+  utils.onElementClick(element, "Click Increase Wallet Limit");
   sleep(random(1500, 2000));
 
   //android.widget.Button[@text="icon 212 560 973 coins"]
-  btn = className("android.widget.Button").textContains("coins").findOne(5000);
-  if (btn) {
+  element = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (element) {
     sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Upgrade coins");
+    utils.onElementClick(element, "Click Upgrade coins");
     sleep(random(2000, 3000));
   }
-  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
-  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
-  if (btn) {
-    sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Close");
-    sleep(random(1500, 2000));
-  }
+
+  // Close
+  sleep(random(1500, 2000));
+  utils.onBoundsClick(eleCloseBounds);
+  sleep(random(1500, 2000));
 }
 
 //android.widget.Button[@text="lvl 27 Increase Vault Capacity Now 100 000M icon Upgrade for 100 000M"]
-btn = className("android.widget.Button").textContains("Increase Vault Capacity").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").textContains("Increase Vault Capacity").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Increase Vault Capacity");
+  utils.onElementClick(element, "Click Increase Vault Capacity");
   sleep(random(1500, 2000));
 
   //android.widget.Button[@text="icon 212 560 973 coins"]
-  btn = className("android.widget.Button").textContains("coins").findOne(5000);
-  if (btn) {
+  element = className("android.widget.Button").textContains("coins").findOne(5000);
+  if (element) {
     sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Upgrade coins");
+    utils.onElementClick(element, "Click Upgrade coins");
     sleep(random(2000, 3000));
   }
-  //android.webkit.WebView[@text="ToON Nation"]/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]
-  btn = className("android.webkit.WebView").text("ToON Nation").findOne(5000);
-  if (btn) {
-    sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Close");
-    sleep(random(1500, 2000));
-  }
+
+  // Close
+  sleep(random(1500, 2000));
+  utils.onBoundsClick(eleCloseBounds);
+  sleep(random(1500, 2000));
 }
 
 sleep(random(2000, 3000));

@@ -9,44 +9,45 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2000, 2900));
 
 //android.widget.TextView[@text="Start"]
-var btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+var element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(6000, 8000));
 
 //android.widget.TextView[@text="Claim"]
-btn = className("android.widget.TextView").text("Claim").findOne(3000);
-if (btn) {
+element = className("android.widget.TextView").text("Claim").findOne(3000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onElementClick(btn, "Click Claim");
+  utils.onElementClick(element, "Click Claim");
   sleep(random(3000, 6000));
 }
 
 //android.widget.TextView[@text="Start Farming"]
-btn = className("android.widget.TextView").text("Start Farming").findOne(3000);
-if (btn) {
+element = className("android.widget.TextView").text("Start Farming").findOne(3000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onElementClick(btn, "Click Start Farming");
+  utils.onElementClick(element, "Click Start Farming");
   sleep(random(3000, 6000));
 }
 
 //android.widget.TextView[@text="Friends"]
-btn = className("android.widget.TextView").text("Friends").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Friends").findOne(5000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onElementClick(btn, "Click Friends");
+  utils.onElementClick(element, "Click Friends");
   sleep(random(3000, 6000));
 }
 
 //android.widget.TextView[@text="Claim"]
-btn = className("android.widget.TextView").text("Claim").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Claim").findOne(5000);
+if (element) {
   sleep(random(600, 1000));
-  utils.onElementClick(btn, "Click Claim");
+  utils.onElementClick(element, "Click Claim");
   sleep(random(3000, 6000));
 }
+
 sleep(random(1500, 3000));
 back();

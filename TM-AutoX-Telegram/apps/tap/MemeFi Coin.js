@@ -22,23 +22,23 @@ if (element) {
   utils.onElementClick(element, "Click Start");
 }
 
-sleep(random(5000, 6000));
+sleep(random(6900, 8000));
 
 //device.width/2, device.height / 2.5
 sleep(random(600, 1000));
 var delay = { min: 15, max: 36 };
-var bounds = { x: device.width / 2, y: device.height / 2.5, w: 200, h: 200 };
+var bounds = { x: device.width / 2.8, y: device.height / 2.8, w: 399, h: 500 };
 var total = 3
 threads.start(() => {
   while (true) {
     for (let i = 0; i < total; i++) {
-      p = utils.getRandomBounds(bounds);
+      p = utils.getRandomBoundsWH(bounds);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }
   }
 })
-sleep(random(38000, 53000));
+sleep(random(69000, 83000));
 threads.shutDownAll();
 
 //android.widget.Button[@text="ListLeft New ListLeft Boosters"]
@@ -97,19 +97,21 @@ back();
 //device.width/2, device.height / 2.5
 sleep(random(600, 1000));
 var delay = { min: 15, max: 36 };
-var bounds = { x: device.width / 2, y: device.height / 2.5, w: 200, h: 200 };
+var bounds = { x: device.width / 2, y: device.height / 2.2, w: 399, h: 500 };
 var total = 3
 threads.start(() => {
   while (true) {
     for (let i = 0; i < total; i++) {
-      p = utils.getRandomBounds(bounds);
+      p = utils.getRandomBoundsWH(bounds);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }
   }
 })
-sleep(random(38000, 53000));
+sleep(random(69000, 83000));
 threads.shutDownAll();
 
-sleep(random(2000, 3000));
+sleep(random(1500, 3000));
+back();
+sleep(random(1500, 3000));
 back();

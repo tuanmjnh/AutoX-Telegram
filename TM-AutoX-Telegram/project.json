@@ -35,7 +35,7 @@
     ],
     "serviceDesc": "Required to automate script operations (click, long press, swipe, etc.), if disabled, only scripts that do not involve automatic operations can be executed.",
     "splashIcon": "res/splashIcon.png",
-    "splashText": "Powered by Autoxjs.com"
+    "splashText": "Powered by TM"
   },
   "libs": [
     "libjackpal-androidterm5.so",
@@ -55,9 +55,9 @@
     "libp7zip.so"
   ],
   "main": "main.js",
-  "name": "TM AutoX-Telegram",
+  "name": "TM-ATX",
   "outputPath": "/storage/emulated/0/Pictures/app",
-  "packageName": "com.TMAutoXTelegram",
+  "packageName": "com.TMATX",
   "projectDirectory": "/storage/emulated/0/脚本/TM-AutoX-Telegram",
   "scripts": {},
   "signingConfig": {

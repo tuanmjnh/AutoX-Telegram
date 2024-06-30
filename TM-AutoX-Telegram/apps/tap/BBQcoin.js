@@ -28,12 +28,12 @@ if (element) {
 //device.width/2, device.height / 2.5
 sleep(random(1500, 2000));
 var delay = { min: 5, max: 20 };
-var bounds = { x: device.width / 2, y: device.height / 2.5, w: 200, h: 200 };
+var bounds = { x: device.width / 2, y: device.height / 2.3, w: 200, h: 200 };
 var total = 5
 threads.start(() => {
   while (true) {
     for (let i = 0; i < total; i++) {
-      p = utils.getRandomBounds(bounds);
+      p = utils.getRandomBoundsWH(bounds);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }

@@ -9,26 +9,26 @@ utils.openUrlWithAppName("Telegram", bot, "Open bot link");
 sleep(random(2000, 2900));
 
 //android.widget.TextView[@text="Start"]
-var btn = className("android.widget.TextView").text("Start").findOne(5000);
-if (btn) {
+var element = className("android.widget.TextView").text("Start").findOne(5000);
+if (element) {
   sleep(random(2000, 2900));
-  utils.onElementClick(btn, "Click Start");
+  utils.onElementClick(element, "Click Start");
 }
 
 sleep(random(6900, 9000));
 
 //android.widget.TextView[@text="Home"]
-btn = className("android.widget.TextView").text("Home").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Home").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Home");
+  utils.onElementClick(element, "Click Home");
   sleep(random(5000, 6000));
 }
 //android.widget.TextView[@text="Storage"]
-btn = className("android.widget.TextView").text("Storage").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Storage").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Storage");
+  utils.onElementClick(element, "Click Storage");
   sleep(random(5000, 6000));
 } else {
   for (let i = 0; i < 6; i++) {
@@ -37,28 +37,28 @@ if (btn) {
     swipe(x, random(600, 800), x, random(230, 250), random(200, 600))
     sleep(random(1500, 2500))
   }
-  btn = className("android.widget.TextView").text("Storage").findOne(5000);
-  if (btn) {
+  element = text("Storage").findOne(5000);
+  if (element) {
     sleep(random(1500, 2000));
-    utils.onElementClick(btn, "Click Storage");
+    utils.onElementClick(element, "Click Storage");
     sleep(random(5000, 6000));
   }
 }
 
 //android.widget.Button[@text="Check NEWS"]
-btn = className("android.widget.Button").text("Check NEWS").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").text("Check NEWS").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Check NEWS");
+  utils.onElementClick(element, "Click Check NEWS");
   sleep(random(1500, 2000));
   back();
 }
 
 //android.widget.Button[@text="Claim HOT"]
-btn = className("android.widget.Button").text("Claim HOT").findOne(5000);
-if (btn) {
+element = className("android.widget.Button").text("Claim HOT").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Claim HOT");
+  utils.onElementClick(element, "Click Claim HOT");
   sleep(random(5000, 6000));
 }
 
@@ -68,9 +68,9 @@ sleep(random(2000, 3000));
 back();
 
 //android.widget.TextView[@text="Close anyway"]
-btn = className("android.widget.TextView").text("Close anyway").findOne(5000);
-if (btn) {
+element = className("android.widget.TextView").text("Close anyway").findOne(5000);
+if (element) {
   sleep(random(1500, 2000));
-  utils.onElementClick(btn, "Click Close anyway");
+  utils.onElementClick(element, "Click Close anyway");
   sleep(random(1500, 2000));
 }

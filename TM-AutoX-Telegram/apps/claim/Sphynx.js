@@ -46,7 +46,7 @@ element = className("android.widget.Button").text("Upgrade").findOne(3000);
 if (element) {
   sleep(random(2000, 2900));
   utils.onElementClick(element, "Click Upgrade");
-  sleep(random(3000, 6000));
+  sleep(random(1000, 2000));
 }
 
 //android.widget.Button[@text="Confirm"]
@@ -54,7 +54,7 @@ element = className("android.widget.Button").text("Confirm").findOne(3000);
 if (element) {
   sleep(random(2000, 2900));
   utils.onElementClick(element, "Click Confirm");
-  sleep(random(3000, 6000));
+  sleep(random(2000, 3000));
 }
 
 //android.widget.Button[@text="gf6NkiL5a0dfAAAAABJRU5ErkJggg=="]
@@ -95,11 +95,11 @@ sleep(random(600, 1000));
 if (elements && elements.length) {
   for (let i = 0; i < elements.length; i++) {
     utils.onElementClick(elements[i], `Click task daily ${i}`);
-    sleep(random(3900, 5000));
-    utils.onElementClick(element, "Click Go Back");
-    sleep(random(3900, 5000));
-    utils.onElementClick(element, "Click Go Back");
-    sleep(random(3900, 5000));
+    sleep(random(5000, 6000));
+    back();
+    sleep(random(1500, 2500));
+    // utils.onElementClick(element, "Click Go Back");
+    // sleep(random(5000, 6000));
   }
 }
 

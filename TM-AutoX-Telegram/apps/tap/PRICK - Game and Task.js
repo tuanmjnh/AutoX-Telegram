@@ -30,7 +30,7 @@ if (element) {
   sleep(random(1500, 2000));
   threads.start(() => {
     while (true) {
-      utils.onElementMultipleGesture(element, 5, { min: 10, max: 20 })//, "Click Multiple Icon");
+      utils.onElementMultipleGesture(element, 5, { min: 10, max: 20 }, -15)//, "Click Multiple Icon");
     }
   })
   sleep(random(20000, 25000));

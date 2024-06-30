@@ -215,13 +215,6 @@ utils.onCaptureScreenshots = function (imageName, screenshotsPath) {
   }
 }
 
-utils.getRandomBounds = (bounds, isObject) => {
-  var fix = 3
-  var p = { x: random(bounds.x + fix, bounds.x + bounds.w - fix), y: random(bounds.y + fix, bounds.y + bounds.h - fix) };
-  if (isObject) return p;
-  else return [p.x, p.y];
-}
-
 utils.onClickArea = ({ x1, y1, x2, y2, log }) => {
   if (log) console.log(log);
   var p = { x: random(x1, x2), y: random(y1, y2) };
@@ -260,14 +253,43 @@ utils.onGetBoundsElement = (element, log) => {
   // Get the bounds of the element
   var bounds = element.bounds();
   // Calculate x, y, width, and height
-  return { x: bounds.left, y: bounds.top, w: bounds.width(), h: bounds.height() };
+  // bounds.left, bounds.top, bounds.right, bounds.bottom
+  return { x1: bounds.left, y1: bounds.top, x2: bounds.right, y2: bounds.bottom, w: bounds.width(), h: bounds.height() };
+}
+
+utils.getRandomBounds = (bounds, fixPercen, isObject) => {
+  // var b = { x1: bounds.left, y1: bounds.top, x2: bounds.right, y2: bounds.bottom, w: bounds.width(), h: bounds.height() };
+  if (!fixPercen) fixPercen = -0.1
+  var FX = bounds.width() * fixPercen / 100
+  var FY = bounds.height() * fixPercen / 100
+  // console.log("[X] - min: " + (bounds.left - FX), " - max: " + (bounds.right + FX))
+  // console.log("[Y] - min: " + (bounds.top - FY), " - max: " + (bounds.bottom + FY))
+  var p = { x: random(bounds.left - FX, bounds.right + FX), y: random(bounds.top - FY, bounds.bottom + FY) };
+  if (isObject) return p;
+  else return [p.x, p.y];
+}
+
+utils.getRandomBoundsWH = (bounds, isObject) => {
+  var p = { x: random(bounds.x, bounds.x + bounds.w), y: random(bounds.y, bounds.y + bounds.h) };
+  if (isObject) return p;
+  else return [p.x, p.y];
+}
+
+utils.onBoundsClick = (bounds, log) => {
+  if (log) console.log(log);
+  if (!bounds) return null;
+  var p = utils.getRandomBounds(bounds)
+  if (!p) return null;
+  click(p[0], p[1]);
+  return p;
 }
 
 utils.onElementClick = (element, log) => {
   if (log) console.log(log);
-  var bounds = utils.onGetBoundsElement(element);
-  if (!bounds) return null;
-  var p = utils.onClickAreaWH(bounds);
+  if (!element) return null;
+  var p = utils.getRandomBounds(element.bounds())
+  if (!p) return null;
+  click(p[0], p[1]);
   return p;
 }
 
@@ -277,37 +299,38 @@ utils.onElementMultipleClick = (element, totalClick, delay, log) => {
   if (!bounds) return null;
   var p = null;
   if (totalClick == 0) {
-    p = utils.onClickAreaWH(bounds);
+    p = utils.onClickArea(bounds);
     sleep(random(delay.min, delay.max));
   } else {
     var total = random(totalClick.min, totalClick.max);
     for (let i = 0; i < total; i++) {
-      p = utils.onClickAreaWH(bounds);
+      p = utils.onClickArea(bounds);
       sleep(random(delay.min, delay.max));
     }
   }
   return p;
 }
 
-utils.onElementMultipleGesture = (element, totalClick, delay, log) => {
+utils.onElementMultipleGesture = (element, totalClick, delay, fixPercen, log) => {
   if (log) console.log(log);
-  var bounds = utils.onGetBoundsElement(element);
+  if (!fixPercen) fixPercen = -0.1
+  var bounds = element.bounds();
   if (!bounds) return null;
   var p = null;
   if (totalClick == 0) {
-    p = utils.getRandomBounds(bounds);
+    p = utils.getRandomBounds(bounds, fixPercen);
     gesture(random(delay.min, delay.max), p, p);
     sleep(random(delay.min * 3, delay.max * 3));
   } else if (totalClick.min && totalClick.max) {
     var total = random(totalClick.min, totalClick.max);
     for (let i = 0; i < total; i++) {
-      p = utils.getRandomBounds(bounds);
+      p = utils.getRandomBounds(bounds, fixPercen);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }
   } else {
     for (let i = 0; i < totalClick; i++) {
-      var p = utils.getRandomBounds(bounds);
+      var p = utils.getRandomBounds(bounds, fixPercen);
       gesture(random(delay.min, delay.max), p, p);
       sleep(random(delay.min * 3, delay.max * 3));
     }
